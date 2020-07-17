@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="252dp"
+        android:layout_height="167dp"
+        android:text="Ноги"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="154dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="252dp"
+        android:layout_height="167dp"
+        android:text="Спина"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="354dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="252dp"
+        android:layout_height="167dp"
+        android:text="грудь"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="548dp" />
+</android.support.constraint.ConstraintLayout>
