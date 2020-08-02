@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Treniroval</string>
+    <string name="Legs">Ноги</string>
+    <string name="Chest">Грудь</string>
+    <string name="Back">Спина</string>
+    <string name="LegsTraining">Тренировка ног</string>
+    <string name="ChestTraining">Тренировка груди</string>
+    <string name="BackTraining">Тренировка спины</string>
+    <string name="ButtonBack">Назад</string>
+    <string name="Exercise">Упражнение</string>
+    <string name="Approach">Подходы</string>
+    <string name="Repeat">повторения</string>
+    <string name="Workload">нагрузка</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="Approaches">Подходов</string>
+    <string name="Repetitions">Повторений</string>
+    <string name="Load">Нагрузка</string>
+
+
 </resources>
