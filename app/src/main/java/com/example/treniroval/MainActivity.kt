@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi
 import android.view.View
 
 class MainActivity : Activity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,8 +18,6 @@ class MainActivity : Activity() {
     fun onClickPastPractice(view: View) {
         val intent = Intent(this, PastTrainingSessionsActivity::class.java)
         startActivity(intent)
-
-
     }
 
     fun onClickNewPractice(view: View) {
