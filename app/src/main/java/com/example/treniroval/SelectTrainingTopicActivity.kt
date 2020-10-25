@@ -3,7 +3,10 @@ package com.example.treniroval
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.treniroval.DBHelper.Companion.KEY_EXERCISE_NAME
 import com.example.treniroval.DBHelper.Companion.TABLE_EXERCISE
@@ -33,7 +36,7 @@ class SelectTrainingTopicActivity : Activity() {
 
     fun clickAdd(view: View) {
         val dataBase = dbHelper.writableDatabase
-        lateinit var contentValues: ContentValues
+        val contentValues = ContentValues()
         contentValues.put(KEY_EXERCISE_NAME, "Grud")
         contentValues.put(KEY_EXERCISE_NAME, "nogi")
         contentValues.put(KEY_EXERCISE_NAME, "spina")
@@ -41,17 +44,17 @@ class SelectTrainingTopicActivity : Activity() {
         dataBase.close()
     }
 
-//    fun clickRead(view: View) {
-//        val dataBase: SQLiteDatabase = dbHelper.writableDatabase
-//        Thread.sleep(1000)
-//        val cursor: Cursor = dataBase.query(TABLE_EXERCISE, null, null, null, null, null, null)
-//        if (cursor.moveToFirst()) {
-//            Log.d("mLog", cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME)))
-//        }
-//        cursor.close()
-//        dbHelper.close()
-//
-//    }
+    fun clickRead(view: View) {
+        val dataBase: SQLiteDatabase = dbHelper.writableDatabase
+        Thread.sleep(1000)
+        val cursor: Cursor = dataBase.query(TABLE_EXERCISE, null, null, null, null, null, null)
+        if (cursor.moveToFirst()) {
+            Log.d("mLog", cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME)))
+        }
+        cursor.close()
+        dbHelper.close()
+
+    }
 
     fun onClickButtonChest(view: View) {
         val intent = Intent(this, TrainingConstructorActivity::class.java)

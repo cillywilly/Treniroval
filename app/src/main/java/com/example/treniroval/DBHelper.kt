@@ -57,8 +57,8 @@ class DBHelper(context: Context?) :
         const val DATABASE_NAME = "treniroval"
         const val TABLE_TRAINING: String = "training"
         const val TABLE_EXERCISE: String = "exercise"
-        const val TABLE_TRAINING_EXERCISE: String = "exercise"
-        const val TABLE_TRAINING_TOPIC: String = "exercise"
+        const val TABLE_TRAINING_EXERCISE: String = "training_exercise"//TODO
+        const val TABLE_TRAINING_TOPIC: String = "training_topic"
 
         const val KEY_ID_TRAINING: String = "_id_training"
         const val KEY_DATE: String = "date"
