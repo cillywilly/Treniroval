@@ -17,6 +17,8 @@
     <string name="Approaches">Подходов</string>
     <string name="Repetitions">Повторений</string>
     <string name="Load">Нагрузка</string>
+    <string name="pastPractice">Прошлые тренировки</string>
+    <string name="newPractice">Новая тренировка</string>
 
 
 </resources>

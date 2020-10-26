@@ -11,17 +11,17 @@ class DBHelper(context: Context?) :
     @Override
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         val SQL_CREATE_TABLE_TRAINING =
-            ("CREATE TABLE $TABLE_TRAINING " +
+            ("CREATE TABLE IF NOT EXISTS $TABLE_TRAINING " +
                     "($KEY_ID_TRAINING INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$KEY_ID_TRAINING_TOPIC TEXT NOT NULL, " +
                     "$KEY_DATE TEXT NOT NULL, " +
                     "FOREIGN KEY ($KEY_ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($KEY_ID_TRAINING_TOPIC)) ;")
         val SQL_CREATE_TABLE_EXERCISE =
-            ("CREATE TABLE $TABLE_EXERCISE " +
+            ("CREATE TABLE IF NOT EXISTS $TABLE_EXERCISE " +
                     "($KEY_ID_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$KEY_EXERCISE_NAME TEXT NOT NULL) ;")
         val SQL_CREATE_TABLE_TRAINING_EXERCISE =
-            ("CREATE TABLE $TABLE_TRAINING_EXERCISE" +
+            ("CREATE TABLE IF NOT EXISTS $TABLE_TRAINING_EXERCISE" +
                     " ($KEY_ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$KEY_ID_TRAINING TEXT NOT NULL, " +
                     "$KEY_ID_EXERCISE TEXT NOT NULL, " +
@@ -31,9 +31,10 @@ class DBHelper(context: Context?) :
                     "FOREIGN KEY ($KEY_ID_TRAINING) REFERENCES $TABLE_TRAINING($KEY_ID_TRAINING) " +
                     "FOREIGN KEY ($KEY_ID_EXERCISE) REFERENCES $TABLE_EXERCISE($KEY_ID_EXERCISE)) ;")
         val SQL_CREATE_TABLE_TRAINING_TOPIC =
-            ("CREATE TABLE $TABLE_TRAINING_TOPIC " +
+            ("CREATE TABLE IF NOT EXISTS $TABLE_TRAINING_TOPIC " +
                     "($KEY_ID_TRAINING_TOPIC INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$KEY_TRAINING_TOPIC TEXT NOT NULL) ;")
+
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_EXERCISE)
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TRAINING_TOPIC)
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TRAINING)
