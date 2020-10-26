@@ -4,5 +4,5 @@ import java.time.LocalDateTime
 
 data class ListItem(
     var trainingName: String,
-    var trainingDate: LocalDateTime
+    var trainingDate: String
 )

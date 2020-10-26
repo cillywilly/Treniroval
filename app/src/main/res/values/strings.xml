@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Treniroval</string>
-    <string name="Legs">Ноги</string>
-    <string name="Chest">Грудь</string>
-    <string name="Back">Спина</string>
+    <string name="Legs">Тренировка ног</string>
+    <string name="Chest">Тренировка груди</string>
+    <string name="Back">Тренировка спины</string>
     <string name="LegsTraining">Тренировка ног</string>
     <string name="ChestTraining">Тренировка груди</string>
     <string name="BackTraining">Тренировка спины</string>

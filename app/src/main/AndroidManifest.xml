@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".item_layout"></activity>
-        <activity android:name=".PastTrainingSessionsActivity" />
+        <activity android:name=".PastTrainingsActivity" />
         <activity android:name=".TrainingConstructorActivity" />
         <activity android:name=".ChestWorkoutActivity" />
         <activity android:name=".SelectTrainingTopicActivity" />

@@ -34,9 +34,9 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
 }
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
-    trainingTopic.add("Ноги")
-    trainingTopic.add("Грудь")
-    trainingTopic.add("Спина")
+    trainingTopic.add("@strings/Legs")
+    trainingTopic.add("@string/Chest")
+    trainingTopic.add("@string/Back")
     for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($KEY_TRAINING_TOPIC) VALUES($trainingTopic);")
 }
 

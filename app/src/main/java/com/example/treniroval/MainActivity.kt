@@ -16,7 +16,7 @@ class MainActivity : Activity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickPastPractice(view: View) {
-        val intent = Intent(this, PastTrainingSessionsActivity::class.java)
+        val intent = Intent(this, PastTrainingsActivity::class.java)
         startActivity(intent)
     }
 

@@ -10,21 +10,20 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_past_trainings.*
 import java.time.LocalDateTime
 
-class PastTrainingSessionsActivity : Activity() {
+class PastTrainingsActivity : Activity() {
+
+    private var managerDB= ManagerDB(this)
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_past_trainings)
 
-//        val trainingList = ArrayList<String>()
-//        trainingList.add("Ноги")
-//        trainingList.add("Грудь")
-//        trainingList.add("Спина")
 
-        val listItems = ArrayList<ListItem>()
-        listItems.add(ListItem("Тренировка ног", LocalDateTime.now()))
-        listItems.add(ListItem("Тренировка груди", LocalDateTime.MIN))
-        listItems.add(ListItem("Тренировка спины", LocalDateTime.MAX))
+
+        managerDB.openDb()
+        val listItems = managerDB.getPastTrainings()
+        managerDB.closeDb()
 
         pastTrainingList.hasFixedSize()
         pastTrainingList.layoutManager = LinearLayoutManager(this)
