@@ -6,30 +6,33 @@
     android:layout_height="wrap_content"
     tools:context=".item_layout">
 
-    <EditText
-        android:id="@+id/trainingDate"
-        android:layout_width="145dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/trainingName"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/trainingName"
-        android:layout_width="145dp"
+        android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="@string/trainingTopic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/trainingDate"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/trainingDate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trainingName"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

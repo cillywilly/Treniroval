@@ -10,22 +10,22 @@ var exercises: ArrayList<String> = ArrayList()
 var trainingTopic: ArrayList<String> = ArrayList()
 
 fun addExercise(sqLiteDatabase: SQLiteDatabase) {
-    exercises.add("Приседания со штангой");
+    exercises.add("Приседания со штангой")
     exercises.add("Жим ногами в тренажёре")
-    exercises.add("Выпады");
+    exercises.add("Выпады")
     exercises.add("Разгибание ног")
     exercises.add("Сгибание ног лежа")
 
-    exercises.add("Жим штанги лежа");
+    exercises.add("Жим штанги лежа")
     exercises.add("Жим гантелей лежа")
     exercises.add("Сведение рук в тренажере")
     exercises.add("Армейский жим")
 
     exercises.add("Становая тяга")
-    exercises.add("Подтягивания");
+    exercises.add("Подтягивания")
     exercises.add("Тяга верхнего блока")
-    exercises.add("Тяга верхнего блока стоя к коленям");
-    exercises.add("Гиперэкстензия");
+    exercises.add("Тяга верхнего блока стоя к коленям")
+    exercises.add("Гиперэкстензия")
     exercises.add("Тяга нижнего блока к поясу")
 
     exercises.add("Пресс")
@@ -35,8 +35,8 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
     trainingTopic.add("@strings/Legs")
-    trainingTopic.add("@string/Chest")
-    trainingTopic.add("@string/Back")
+    trainingTopic.add("@strings/Chest")
+    trainingTopic.add("@strings/Back")
     for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($KEY_TRAINING_TOPIC) VALUES($trainingTopic);")
 }
 

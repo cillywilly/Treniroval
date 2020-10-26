@@ -19,6 +19,8 @@
     <string name="Load">Нагрузка</string>
     <string name="pastPractice">Прошлые тренировки</string>
     <string name="newPractice">Новая тренировка</string>
+    <string name="trainingTopic">trainingTopic</string>
+    <string name="trainingDate">trainingDate</string>
 
 
 </resources>

@@ -6,6 +6,6 @@ import android.support.v7.app.AppCompatActivity
 class item_layout : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_layout)
+        setContentView(R.layout.item_past_training)
     }
 }

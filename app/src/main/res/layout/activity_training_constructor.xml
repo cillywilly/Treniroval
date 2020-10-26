@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pastTrainingList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button3"
@@ -16,41 +28,5 @@
         android:text="@string/ButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginBottom="48dp"
-        android:text="Жим лежа"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="64dp"
-        android:text="разводка"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox3"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginBottom="64dp"
-        android:text="и т.д."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

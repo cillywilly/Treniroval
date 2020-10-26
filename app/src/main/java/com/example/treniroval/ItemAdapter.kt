@@ -19,9 +19,9 @@ class ItemAdapter(listArray: ArrayList<ListItem>, context: Context) :
 
         fun bind(listItem: ListItem, context: Context) {
             trainingName.text = listItem.trainingName
-            trainingDate.text = listItem.trainingDate.toString()
+            trainingDate.text = listItem.trainingDate
             itemView.setOnClickListener {
-                Toast.makeText(context, "Pressed: ${trainingName.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Pressed: ${trainingName.text}", Toast.LENGTH_SHORT).show() //todo переход в тренировку
             }
 
         }
@@ -31,7 +31,7 @@ class ItemAdapter(listArray: ArrayList<ListItem>, context: Context) :
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
         val inflater = LayoutInflater.from(contextR)
-        return ViewHolder(inflater.inflate(R.layout.item_layout, p0, false))
+        return ViewHolder(inflater.inflate(R.layout.item_past_training, p0, false))
 
     }
 
