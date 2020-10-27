@@ -8,7 +8,6 @@ import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_past_trainings.*
-import java.time.LocalDateTime
 
 class PastTrainingsActivity : Activity() {
 
@@ -28,7 +27,7 @@ class PastTrainingsActivity : Activity() {
         pastTrainingList.hasFixedSize()
         pastTrainingList.layoutManager = LinearLayoutManager(this)
 
-        pastTrainingList.adapter = ItemAdapter(listItems, this)
+        pastTrainingList.adapter = ItemAdapterPastTraining(listItems, this)
     }
 
     fun onClickBack(view: View) {

@@ -12,7 +12,6 @@ import com.example.treniroval.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
 import com.example.treniroval.DBHelper.Companion.TABLE_TRAINING
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Calendar.APRIL
 
 class ManagerDB(context: Context) {
     private val DBHelper = DBHelper(context)
@@ -27,7 +26,7 @@ class ManagerDB(context: Context) {
         val dateTime = LocalDateTime.now()
         val value = ContentValues().apply {
             put(KEY_ID_TRAINING_TOPIC, trainingTopic)
-            put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("H:m d/m/y")))
+            put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/mm/yyyy")))
         }
         println(value)
 
@@ -35,13 +34,13 @@ class ManagerDB(context: Context) {
     }
 
     @SuppressLint("Recycle")
-    fun getPastTrainings() : ArrayList<ListItem> {
-        val listItems = ArrayList<ListItem>()
+    fun getPastTrainings() : ArrayList<ListItemPastTraining> {
+        val listItems = ArrayList<ListItemPastTraining>()
         val cursor = db?.query(Companion.TABLE_TRAINING,null,null,null,null,null,Companion.KEY_DATE)
         while (cursor?.moveToNext()!!) {
             val trainingTopic = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(KEY_DATE))
-            listItems.add(ListItem(trainingTopic,date))
+            listItems.add(ListItemPastTraining(trainingTopic,date))
         }
         return listItems
     }
