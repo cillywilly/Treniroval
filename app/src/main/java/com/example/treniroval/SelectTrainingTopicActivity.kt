@@ -10,7 +10,6 @@ import android.view.View
 
 class SelectTrainingTopicActivity : Activity() {
 
-    private var dbHelper = DBHelper(this)
     private var managerDB= ManagerDB(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {

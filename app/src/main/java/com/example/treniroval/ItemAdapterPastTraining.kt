@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 
-class ItemAdapterPastTraining(listArrayPastTraining: ArrayList<ListItemPastTraining>, context: Context) :
-    RecyclerView.Adapter<ItemAdapterPastTraining.ViewHolder>() {
+class ItemAdapterPastTraining(
+    listArrayPastTraining: ArrayList<ListItemPastTraining>,
+    context: Context
+) : RecyclerView.Adapter<ItemAdapterPastTraining.ViewHolder>() {
     var listItemR = listArrayPastTraining
     var contextR = context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val trainingName: TextView = view.findViewById(R.id.trainingName)
-        private val trainingDate: TextView = view.findViewById(R.id.trainingDate)
+        private val trainingName = view.findViewById<TextView>(R.id.trainingName)
+        private val trainingDate = view.findViewById<TextView>(R.id.trainingDate)
 
         fun bind(listItemPastTraining: ListItemPastTraining, context: Context) {
             trainingName.text = listItemPastTraining.trainingName
@@ -26,18 +28,6 @@ class ItemAdapterPastTraining(listArrayPastTraining: ArrayList<ListItemPastTrain
             }
         }
     }
-
-    class ViewTrainingConstructor(view: View) : RecyclerView.ViewHolder(view) {
-        private val exercise: TextView = view.findViewById(R.id.exercise)
-
-        fun bind(listItemExercise: ListItemExercise, context: Context) {
-            exercise.text = listItemExercise.exercise
-            itemView.setOnClickListener {
-                Toast.makeText(context, "Pressed: $listItemExercise", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 

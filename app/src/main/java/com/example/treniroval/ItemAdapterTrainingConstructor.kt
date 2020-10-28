@@ -13,19 +13,16 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
     var listItemR = listArrayExercise
     var contextR = context
 
-
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val exercise: TextView = view.findViewById(R.id.exercise)
+        private val exercise = view.findViewById<TextView>(R.id.exercise)
 
         fun bind(listItemExercise: ListItemExercise, context: Context) {
             exercise.text = listItemExercise.exercise
             itemView.setOnClickListener {
-                Toast.makeText(context, "Pressed: $listItemExercise", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Pressed: ${exercise.text}", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
@@ -39,7 +36,8 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-
+        val listExercise = listItemR[p1]
+        p0.bind(listExercise, contextR)
     }
 
 }

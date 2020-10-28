@@ -30,13 +30,13 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
 
     exercises.add("Пресс")
     exercises.add("")
-    for (exercise in exercises) sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES($exercise);")
+    for (exercise in exercises) sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES('$exercise');")
 }
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
-    trainingTopic.add("@strings/Legs")
-    trainingTopic.add("@strings/Chest")
-    trainingTopic.add("@strings/Back")
-    for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($KEY_TRAINING_TOPIC) VALUES($trainingTopic);")
+    trainingTopic.add("Тренировка ног")
+    trainingTopic.add("Тренировка груди")
+    trainingTopic.add("Тренировка спины")
+    for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($KEY_TRAINING_TOPIC) VALUES('$trainingTopic');")
 }
 

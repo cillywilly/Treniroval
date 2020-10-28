@@ -8,6 +8,7 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import com.example.treniroval.DBHelper.Companion
 import com.example.treniroval.DBHelper.Companion.KEY_DATE
+import com.example.treniroval.DBHelper.Companion.KEY_EXERCISE_NAME
 import com.example.treniroval.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
 import com.example.treniroval.DBHelper.Companion.TABLE_TRAINING
 import java.time.LocalDateTime
@@ -25,8 +26,8 @@ class ManagerDB(context: Context) {
     fun insertTraining(trainingTopic: String) {
         val dateTime = LocalDateTime.now()
         val value = ContentValues().apply {
+            put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
             put(KEY_ID_TRAINING_TOPIC, trainingTopic)
-            put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/mm/yyyy")))
         }
         println(value)
 
@@ -36,13 +37,24 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getPastTrainings() : ArrayList<ListItemPastTraining> {
         val listItems = ArrayList<ListItemPastTraining>()
-        val cursor = db?.query(Companion.TABLE_TRAINING,null,null,null,null,null,Companion.KEY_DATE)
+        val cursor = db?.query(Companion.TABLE_TRAINING,null,null,null,null,null, Companion.KEY_DATE)
         while (cursor?.moveToNext()!!) {
             val trainingTopic = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(KEY_DATE))
             listItems.add(ListItemPastTraining(trainingTopic,date))
         }
         return listItems
+    }
+
+    @SuppressLint("Recycle")
+    fun getExercises(): ArrayList<ListItemExercise> {
+        val listItemExercise = ArrayList<ListItemExercise>()
+        val cursor = db?.query(Companion.TABLE_EXERCISE,null,null,null,null,null, KEY_ID_EXERCISE)
+        while (cursor?.moveToNext()!!) {
+            val exercise = cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME))
+            listItemExercise.add(ListItemExercise(exercise))
+        }
+        return listItemExercise
     }
 
 
