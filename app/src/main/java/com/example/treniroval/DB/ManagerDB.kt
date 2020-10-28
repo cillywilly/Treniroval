@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.DB
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -6,11 +6,14 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import android.support.annotation.RequiresApi
-import com.example.treniroval.DBHelper.Companion
-import com.example.treniroval.DBHelper.Companion.KEY_DATE
-import com.example.treniroval.DBHelper.Companion.KEY_EXERCISE_NAME
-import com.example.treniroval.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
-import com.example.treniroval.DBHelper.Companion.TABLE_TRAINING
+import com.example.treniroval.DB.DBHelper.Companion
+import com.example.treniroval.DB.DBHelper.Companion.KEY_DATE
+import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
+import com.example.treniroval.KEY_ID_EXERCISE
+import com.example.treniroval.ListItemExercise
+import com.example.treniroval.ListItemPastTraining
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

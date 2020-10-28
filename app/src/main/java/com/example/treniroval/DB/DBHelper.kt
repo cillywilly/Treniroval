@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.DB
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

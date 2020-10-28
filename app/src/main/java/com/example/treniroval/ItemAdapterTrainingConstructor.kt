@@ -5,8 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.CheckBox
 
 class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExercise>, context: Context) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
@@ -14,13 +13,14 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
     var contextR = context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val exercise = view.findViewById<TextView>(R.id.exercise)
+        private val exercise = view.findViewById<CheckBox>(R.id.exercise)
 
-        fun bind(listItemExercise: ListItemExercise, context: Context) {
+        fun bind(listItemExercise: ListItemExercise) {
             exercise.text = listItemExercise.exercise
-            itemView.setOnClickListener {
-                Toast.makeText(context, "Pressed: ${exercise.text}", Toast.LENGTH_SHORT).show()
-            }
+            println(exercise.text)
+//            itemView.setOnClickListener {
+//                Toast.makeText(context, "Pressed: ${exercise.text}", Toast.LENGTH_SHORT).show()
+//            }
         }
     }
 
@@ -37,7 +37,7 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val listExercise = listItemR[p1]
-        p0.bind(listExercise, contextR)
+        p0.bind(listExercise)
     }
 
 }

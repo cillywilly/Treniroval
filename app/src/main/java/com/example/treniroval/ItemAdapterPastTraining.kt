@@ -41,7 +41,7 @@ class ItemAdapterPastTraining(
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        var listItem = listItemR[p1]
+        val listItem = listItemR[p1]
         p0.bind(listItem, contextR)
     }
 

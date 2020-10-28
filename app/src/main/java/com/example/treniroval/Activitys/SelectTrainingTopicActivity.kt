@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.Activitys
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.view.View
+import com.example.treniroval.DB.ManagerDB
+import com.example.treniroval.R
 
 
 class SelectTrainingTopicActivity : Activity() {

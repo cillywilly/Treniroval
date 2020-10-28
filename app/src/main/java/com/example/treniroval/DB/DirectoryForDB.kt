@@ -1,10 +1,10 @@
-package com.example.treniroval
+package com.example.treniroval.DB
 
 import android.database.sqlite.SQLiteDatabase
-import com.example.treniroval.DBHelper.Companion.KEY_EXERCISE_NAME
-import com.example.treniroval.DBHelper.Companion.KEY_TRAINING_TOPIC
-import com.example.treniroval.DBHelper.Companion.TABLE_EXERCISE
-import com.example.treniroval.DBHelper.Companion.TABLE_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.KEY_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
 
 var exercises: ArrayList<String> = ArrayList()
 var trainingTopic: ArrayList<String> = ArrayList()
@@ -30,7 +30,9 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
 
     exercises.add("Пресс")
     exercises.add("")
-    for (exercise in exercises) sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES('$exercise');")
+    for (exercise in exercises) {
+        sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES('$exercise');")
+    }
 }
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
