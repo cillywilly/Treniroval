@@ -9,7 +9,7 @@ import com.example.treniroval.Activitys.TrainingConstructorActivity
 class ChestWorkoutActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_training)
+        setContentView(R.layout.activity_training_complited)
     }
 
     fun onClickBack(view: View) {

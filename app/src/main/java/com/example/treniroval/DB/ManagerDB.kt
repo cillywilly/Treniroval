@@ -11,7 +11,7 @@ import com.example.treniroval.DB.DBHelper.Companion.KEY_DATE
 import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
 import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
-import com.example.treniroval.KEY_ID_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_EXERCISE
 import com.example.treniroval.ListItemExercise
 import com.example.treniroval.ListItemPastTraining
 import java.time.LocalDateTime

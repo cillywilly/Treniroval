@@ -12,7 +12,7 @@
         <activity android:name=".item_layout_past_trainings"></activity>
         <activity android:name=".Activitys.PastTrainingsActivity" />
         <activity android:name=".Activitys.TrainingConstructorActivity" />
-        <activity android:name=".ChestWorkoutActivity" />
+        <activity android:name=".Activitys.TrainingActivity" />
         <activity android:name=".Activitys.SelectTrainingTopicActivity" />
         <activity android:name=".Activitys.MainActivity">
             <intent-filter>

@@ -1,12 +1,15 @@
 package com.example.treniroval
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.example.treniroval.Activitys.TrainingActivity
 
 class ItemAdapterPastTraining(
     listArrayPastTraining: ArrayList<ListItemPastTraining>,
@@ -23,6 +26,8 @@ class ItemAdapterPastTraining(
             trainingName.text = listItemPastTraining.trainingName
             trainingDate.text = listItemPastTraining.trainingDate
             itemView.setOnClickListener {
+                val intent = Intent(context, TrainingActivity::class.java)
+                startActivity(context, intent,null)
                 Toast.makeText(context, "Pressed: ${trainingName.text}", Toast.LENGTH_SHORT)
                     .show() //todo переход в тренировку
             }
