@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.ListItem
 
 data class ListItemPastTraining(
     var trainingName: String,

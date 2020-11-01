@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.ItemAdapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.example.treniroval.Activitys.TrainingActivity
+import com.example.treniroval.ListItem.ListItemPastTraining
+import com.example.treniroval.R
 
 class ItemAdapterPastTraining(
     listArrayPastTraining: ArrayList<ListItemPastTraining>,
@@ -28,8 +29,6 @@ class ItemAdapterPastTraining(
             itemView.setOnClickListener {
                 val intent = Intent(context, TrainingActivity::class.java)
                 startActivity(context, intent,null)
-                Toast.makeText(context, "Pressed: ${trainingName.text}", Toast.LENGTH_SHORT)
-                    .show() //todo переход в тренировку
             }
         }
     }

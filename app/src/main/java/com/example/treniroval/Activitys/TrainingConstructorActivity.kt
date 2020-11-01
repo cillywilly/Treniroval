@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
-import com.example.treniroval.ItemAdapterTrainingConstructor
+import com.example.treniroval.ItemAdapter.ItemAdapterTrainingConstructor
 import com.example.treniroval.R
 import kotlinx.android.synthetic.main.activity_training_constructor.*
 
@@ -23,15 +23,9 @@ class TrainingConstructorActivity : Activity() {
         val listItemExercise = managerDB.getExercises()
         managerDB.closeDb()
 
-//        val listItemExercise = ArrayList<ListItemExercise>()
-//        listItemExercise.add(ListItemExercise("dsads"))
-//        listItemExercise.add(ListItemExercise("aa"))
-//        listItemExercise.add(ListItemExercise("ass"))
-
         println( listItemExercise)
         exerciseList.hasFixedSize()
         exerciseList.layoutManager = LinearLayoutManager(this)
-
 
         exerciseList.adapter = ItemAdapterTrainingConstructor(listItemExercise,this)
     }

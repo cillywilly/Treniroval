@@ -9,11 +9,12 @@ import android.support.annotation.RequiresApi
 import com.example.treniroval.DB.DBHelper.Companion
 import com.example.treniroval.DB.DBHelper.Companion.KEY_DATE
 import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
-import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_EXERCISE
-import com.example.treniroval.ListItemExercise
-import com.example.treniroval.ListItemPastTraining
+import com.example.treniroval.ListItem.ListItemExercise
+import com.example.treniroval.ListItem.ListItemPastTraining
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -40,7 +41,7 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getPastTrainings() : ArrayList<ListItemPastTraining> {
         val listItems = ArrayList<ListItemPastTraining>()
-        val cursor = db?.query(Companion.TABLE_TRAINING,null,null,null,null,null, Companion.KEY_DATE)
+        val cursor = db?.query(Companion.TABLE_TRAINING,null,null,null,null,null, KEY_ID_TRAINING)
         while (cursor?.moveToNext()!!) {
             val trainingTopic = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(KEY_DATE))

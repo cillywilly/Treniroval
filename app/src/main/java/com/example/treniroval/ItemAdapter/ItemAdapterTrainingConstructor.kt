@@ -1,4 +1,4 @@
-package com.example.treniroval
+package com.example.treniroval.ItemAdapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import com.example.treniroval.ListItem.ListItemExercise
+import com.example.treniroval.R
 
 class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExercise>, context: Context) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
@@ -27,7 +29,7 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
         val inflater = LayoutInflater.from(contextR)
-        return ViewHolder(inflater.inflate(R.layout.item_training_exercise, p0, false))
+        return ViewHolder(inflater.inflate(R.layout.item_training_exercises, p0, false))
 
     }
 
