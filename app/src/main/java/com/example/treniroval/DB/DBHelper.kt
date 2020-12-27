@@ -3,6 +3,8 @@ package com.example.treniroval.DB
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
 
 
 class DBHelper(context: Context?) :
@@ -74,28 +76,39 @@ class DBHelper(context: Context?) :
         const val DATABASE_VERSION = 3
         const val DATABASE_NAME = "treniroval"
 
-        const val TABLE_EXERCISE: String = "exercise"
-        const val KEY_ID_EXERCISE: String = "id_exercise"
-        const val KEY_EXERCISE_NAME: String = "exercise_name"
+        const val TABLE_EXERCISE: String = "exercise" //таблица названий упражнений
+        const val KEY_ID_EXERCISE: String = "id_exercise" //ИД используется 2 раза это +(1)+
+        const val KEY_EXERCISE_NAME: String = "exercise_name" //название упражнения
 
-        const val TABLE_TRAINING: String = "training"
-        const val KEY_ID_TRAINING: String = "id_training"
-        const val KEY_ID_TRAINING_TOPIC: String = "id_training_topic"
-        const val KEY_DATE: String = "date"
+        const val TABLE_TRAINING: String =
+            "training" //таблица УНИКАЛЬНЫХ тренировок
+        const val KEY_ID_TRAINING: String = "id_training" //ИД
+        const val KEY_ID_TRAINING_TOPIC: String =
+            "id_training_topic" //ИД используется 2 раза это -(1)-
+        const val KEY_DATE: String = "date" //дата тренировки
 
-        const val TABLE_TRAINING_TOPIC: String = "training_topic"
-        const val KEY_TRAINING_TOPIC: String = "training_topic"
+        const val TABLE_TRAINING_TOPIC: String = "training_topic"  //таблица названий тренировок
+        const val KEY_TRAINING_TOPIC: String = "training_topic" //название тренировки + -(2)-
 
-        const val TABLE_TRAINING_EXERCISE: String = "training_exercise"
-        const val KEY_ID_TRAINING_EXERCISE: String = "id_training_exercise"
-        const val KEY_APPROACH: String = "approach"
-        const val KEY_REPEAT: String = "repeat"
-        const val KEY_WORKLOAD: String = "workload"
+        const val TABLE_TRAINING_EXERCISE: String =
+            "training_exercise" //таблица УНИКАЛЬНЫХ упражнений для ВСЕХ тренировок
+        const val KEY_ID_TRAINING_EXERCISE: String = "id_training_exercise" //ИД + +(2)+
+        const val KEY_APPROACH: String = "approach" //номер подхода
+        const val KEY_REPEAT: String = "repeat" //количество повторений
+        const val KEY_WORKLOAD: String = "workload" // нагрузка
     }
 }
+
+/**в главной таблице TABLE_TRAINING_EXERCISE хранятся все ПОДХОДЫ
+ * 1 тренировка - это дата+название (сортировка истории по дате)
+ *в нее входят i УНИКАЛЬНЫХ подходов. каждый подход содержит количество повторений и нагрузку по время повторения
+ * подходы объединяются названием упражнения
+ * упражнения объединяются уникальной тренировкой
+ */
 //"FOREIGN": syntax error (code 1 SQLITE_ERROR): , while compiling:
-var ttt = "CREATE TABLE training_exercise (_id_training_exercise INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        "_id_training TEXT NOT NULL, _id_exercise TEXT NOT NULL, approach TEXT NOT NULL," +
-        " repeat TEXT NOT NULL, workload TEXT NOT NULL " +
-        "FOREIGN KEY (_id_training) REFERENCES training(_id_training) " +
-        "FOREIGN KEY (_id_exercise) REFERENCES exercise(_id_exercise)) ;"
+var ttt =
+    "CREATE TABLE training_exercise (_id_training_exercise INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "_id_training TEXT NOT NULL, _id_exercise TEXT NOT NULL, approach TEXT NOT NULL," +
+            " repeat TEXT NOT NULL, workload TEXT NOT NULL " +
+            "FOREIGN KEY (_id_training) REFERENCES training(_id_training) " +
+            "FOREIGN KEY (_id_exercise) REFERENCES exercise(_id_exercise)) ;"
