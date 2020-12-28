@@ -1,4 +1,4 @@
-package com.example.treniroval.Activitys
+package com.example.treniroval.activitys
 
 import android.app.Activity
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
-import com.example.treniroval.ItemAdapter.ItemAdapterTrainingConstructor
 import com.example.treniroval.R
+import com.example.treniroval.itemAdapter.ItemAdapterTrainingConstructor
 import kotlinx.android.synthetic.main.activity_training_constructor.*
 
 

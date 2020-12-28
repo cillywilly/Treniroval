@@ -1,4 +1,4 @@
-package com.example.treniroval.ItemAdapter
+package com.example.treniroval.itemAdapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

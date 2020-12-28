@@ -1,4 +1,4 @@
-package com.example.treniroval.Activitys
+package com.example.treniroval.activitys
 
 import android.app.Activity
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
-import com.example.treniroval.ItemAdapter.ItemAdapterPastTraining
 import com.example.treniroval.R
+import com.example.treniroval.itemAdapter.ItemAdapterPastTraining
 import kotlinx.android.synthetic.main.activity_past_trainings.*
 
 class PastTrainingsActivity : Activity() {

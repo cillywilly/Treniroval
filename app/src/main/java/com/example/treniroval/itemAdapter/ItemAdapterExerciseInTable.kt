@@ -1,18 +1,17 @@
-package com.example.treniroval.ItemAdapter
+package com.example.treniroval.itemAdapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.treniroval.Activitys.TrainingActivity
 import com.example.treniroval.ListItem.ListItemPastTraining
 import com.example.treniroval.R
+import com.example.treniroval.activitys.TrainingActivity
 
-class ItemAdapterPastTraining(
+class ItemAdapterExerciseInTable(
     listArrayPastTraining: ArrayList<ListItemPastTraining>,
     context: Context
 ) : RecyclerView.Adapter<ItemAdapterPastTraining.ViewHolder>() {
@@ -28,25 +27,21 @@ class ItemAdapterPastTraining(
             trainingDate.text = listItemPastTraining.trainingDate
             itemView.setOnClickListener {
                 val intent = Intent(context, TrainingActivity::class.java)
-                startActivity(context, intent,null)
+                ContextCompat.startActivity(context, intent, null)
             }
         }
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemAdapterPastTraining.ViewHolder {
+        TODO("Not yet implemented")
+    }
 
-        val inflater = LayoutInflater.from(contextR)
-        return ViewHolder(inflater.inflate(R.layout.item_past_training, p0, false))
-
+    override fun onBindViewHolder(p0: ItemAdapterPastTraining.ViewHolder, p1: Int) {
+        TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int {
-        return listItemR.size
+        TODO("Not yet implemented")
     }
-
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        val listItem = listItemR[p1]
-        p0.bind(listItem, contextR)
-    }
-
 }
+

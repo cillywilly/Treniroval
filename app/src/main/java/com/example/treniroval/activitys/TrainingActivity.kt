@@ -1,4 +1,4 @@
-package com.example.treniroval.Activitys
+package com.example.treniroval.activitys
 
 import android.annotation.SuppressLint
 import android.app.Activity
