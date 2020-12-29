@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.treniroval.ListItem.ListItemPastTraining
 import com.example.treniroval.R
-import com.example.treniroval.activitys.TrainingActivity
+import com.example.treniroval.activitys.CurrentPastTainingActivity
 
 class ItemAdapterPastTraining(
     listArrayPastTraining: ArrayList<ListItemPastTraining>,
@@ -27,7 +27,8 @@ class ItemAdapterPastTraining(
             trainingName.text = listItemPastTraining.trainingName
             trainingDate.text = listItemPastTraining.trainingDate
             itemView.setOnClickListener {
-                val intent = Intent(context, TrainingActivity::class.java)
+//                val intent = Intent(context, TrainingActivity::class.java)
+                val intent = Intent(context, CurrentPastTainingActivity::class.java)
                 startActivity(context, intent,null)
             }
         }
