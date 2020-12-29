@@ -9,7 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
-import kotlinx.android.synthetic.main.activity_past_trainings.*
+import com.example.treniroval.itemAdapter.ItemAdapterExerciseInTable
+import kotlinx.android.synthetic.main.activity_current_past_training.*
 
 class CurrentPastTainingActivity : Activity() {
     private var managerDB= ManagerDB(this)
@@ -22,13 +23,13 @@ class CurrentPastTainingActivity : Activity() {
 
 
         managerDB.openDb()
-//        val listItems = managerDB.getPastTrainings()//нужно вернуть вругой лист
+        val listItems = managerDB.getCurrentTraining()
         managerDB.closeDb()
 
-        pastTrainingList.hasFixedSize()
-        pastTrainingList.layoutManager = LinearLayoutManager(this)
+        currentPastTraining.hasFixedSize()
+        currentPastTraining.layoutManager = LinearLayoutManager(this)
 
-//        pastTrainingList.adapter = ItemAdapterExerciseInTable(listItems, this)
+        currentPastTraining.adapter = ItemAdapterExerciseInTable(listItems, this)
     }
 
     fun onClickBack(view: View) {

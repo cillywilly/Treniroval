@@ -3,8 +3,6 @@ package com.example.treniroval.DB
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.treniroval.DB.DBHelper.Companion.TABLE_EXERCISE
-import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
 
 
 class DBHelper(context: Context?) :
@@ -60,6 +58,7 @@ class DBHelper(context: Context?) :
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TRAINING_EXERCISE)
         addExercise(sqLiteDatabase)
         addTrainingTopic(sqLiteDatabase)
+        addApproach(sqLiteDatabase)
     }
 
     override fun onUpgrade(
@@ -104,6 +103,7 @@ class DBHelper(context: Context?) :
  *в нее входят i УНИКАЛЬНЫХ подходов. каждый подход содержит количество повторений и нагрузку по время повторения
  * подходы объединяются названием упражнения
  * упражнения объединяются уникальной тренировкой
+ * https://ondras.zarovi.cz/sql/demo/
  */
 //"FOREIGN": syntax error (code 1 SQLITE_ERROR): , while compiling:
 var ttt =
