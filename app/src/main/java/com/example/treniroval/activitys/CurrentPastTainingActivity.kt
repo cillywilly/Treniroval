@@ -24,6 +24,9 @@ class CurrentPastTainingActivity : Activity() {
 
         managerDB.openDb()
         val listItems = managerDB.getCurrentTraining()
+
+        for (exercise in listItems) {
+        }
         managerDB.closeDb()
 
         currentPastTraining.hasFixedSize()
@@ -31,6 +34,7 @@ class CurrentPastTainingActivity : Activity() {
 
         currentPastTraining.adapter = ItemAdapterExerciseInTable(listItems, this)
     }
+
 
     fun onClickBack(view: View) {
         val intent = Intent(this, MainActivity::class.java)
