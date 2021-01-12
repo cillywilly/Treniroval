@@ -1,5 +1,6 @@
 package com.example.treniroval.DB
 
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.treniroval.DB.DBHelper.Companion.KEY_APPROACH
 import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
@@ -21,17 +22,19 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
         val app: String = i.toString()
         val rep: String = (8..12).random().toString()
         val loa: String = (40..70).random().toString()
-        val list = ListItemExerciseInTable("Приседания",
+        val list = ListItemExerciseInTable("Приседания со штангой",
             ListItemApproachInExercise(app, rep, loa)
         )
         exerciseTraining.add(list)
     }
     for (exercise in exerciseTraining) {
         sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_EXERCISE" +
-                "($KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +
-                "VALUES('${exercise.listItemApproachInExercise?.approachNumber}," +
-                "${exercise.listItemApproachInExercise?.repeatSum}," +
-                "${exercise.listItemApproachInExercise?.load}');")
+                "(${DBHelper.KEY_ID_TRAINING}, ${DBHelper.KEY_ID_EXERCISE},$KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +
+                "VALUES('1', '1', " +
+                "'45','32','67');")
+//                "${exercise.listItemApproachInExercise?.approachNumber}, " +
+//                "${exercise.listItemApproachInExercise?.repeatSum}, " +
+//                "${exercise.listItemApproachInExercise?.load}' );")
     }
 }
 
@@ -59,6 +62,13 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
     for (exercise in exercises) {
         sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES('$exercise');")
     }
+    //так можно саутить из базы)
+//    val s: Cursor = sqLiteDatabase.rawQuery("select * from $TABLE_EXERCISE", null)
+//    s.moveToFirst()
+//    println(s.getString(0))
+//    println(s.getString(1))
+
+
 }
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {

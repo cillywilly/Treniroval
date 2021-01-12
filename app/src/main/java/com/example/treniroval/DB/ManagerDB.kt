@@ -74,16 +74,18 @@ class ManagerDB(context: Context) {
         val listItemExerciseInTable = ArrayList<ListItemExerciseInTable>()
         val cursor = db?.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
-            KEY_ID_EXERCISE, null, null, null, KEY_ID_TRAINING_EXERCISE
+            null, null, null, null, KEY_ID_TRAINING_EXERCISE
         )
+        cursor?.moveToFirst()
         while (cursor?.moveToNext()!!) {
-            val exerciseName = cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME))
+                val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
+                val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
             val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
             val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
             val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
             listItemExerciseInTable.add(
                 ListItemExerciseInTable(
-                    exerciseName,
+                    idExercise,
                     ListItemApproachInExercise(numOfApproach, sumOfRepeats, workLoad)
                 )
             )

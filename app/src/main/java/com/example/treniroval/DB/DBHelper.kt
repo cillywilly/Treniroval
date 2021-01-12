@@ -59,6 +59,7 @@ class DBHelper(context: Context?) :
         addExercise(sqLiteDatabase)
         addTrainingTopic(sqLiteDatabase)
         addApproach(sqLiteDatabase)
+
     }
 
     override fun onUpgrade(
