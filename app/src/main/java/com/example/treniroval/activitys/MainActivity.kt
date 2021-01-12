@@ -6,9 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.view.View
+import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 
 class MainActivity : Activity() {
+
+    private var managerDB= ManagerDB(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,5 +27,10 @@ class MainActivity : Activity() {
     fun onClickNewPractice(view: View) {
         val intent = Intent(this, SelectTrainingTopicActivity::class.java)
         startActivity(intent)
+    }
+
+    fun onClickDrop(view: View) {
+        managerDB.openDb()
+        managerDB.dropDB()
     }
 }

@@ -35,11 +35,11 @@ class CurrentPastTainingActivity : Activity() {
             s.moveToFirst()
             println(s.getString(0))
             println(s.getString(1))
-        }//ниче не кладет в базу по этому падает
+        }
 
 
         for (exercise in listItems) {
-            println(exercise)
+            println("YPRAGNENIE : "+exercise)
         }
         managerDB.closeDb()
 

@@ -33,4 +33,15 @@
         app:layout_constraintVertical_bias="0.802"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/dropAllTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickDrop"
+        android:text="DropAllTable"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPastPractice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

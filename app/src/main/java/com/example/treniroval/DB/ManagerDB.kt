@@ -32,6 +32,14 @@ class ManagerDB(context: Context) {
         db = DBHelper.writableDatabase
     }
 
+    fun dropDB() {
+        db?.execSQL("drop table if exists ${Companion.TABLE_TRAINING_EXERCISE}")
+        db?.execSQL("drop table if exists $TABLE_TRAINING")
+        db?.execSQL("drop table if exists ${Companion.TABLE_TRAINING_TOPIC}")
+        db?.execSQL("drop table if exists ${Companion.TABLE_EXERCISE}")
+        db?.let { DBHelper.onCreate(it) }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertTraining(trainingTopic: String) {
         val dateTime = LocalDateTime.now()
