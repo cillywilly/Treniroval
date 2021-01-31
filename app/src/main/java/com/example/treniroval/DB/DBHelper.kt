@@ -21,18 +21,18 @@ class DBHelper(context: Context?) :
         val SQL_CREATE_TABLE_TRAINING =
             ("CREATE TABLE $TABLE_TRAINING " +
                     "($KEY_ID_TRAINING INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_ID_TRAINING_TOPIC TEXT NOT NULL, " +
+                    "$KEY_ID_TRAINING_TOPIC INTEGER NOT NULL, " +
                     "$KEY_DATE TEXT NOT NULL, " +
                     "FOREIGN KEY ($KEY_ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($KEY_ID_TRAINING_TOPIC)) ;")
         val SQL_CREATE_TABLE_TRAINING_EXERCISE =
             ("CREATE TABLE $TABLE_TRAINING_EXERCISE" +
                     " ($KEY_ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_ID_TRAINING TEXT NOT NULL, " +
-                    "$KEY_ID_EXERCISE TEXT NOT NULL, " +
+                    "$KEY_ID_TRAINING INTEGER NOT NULL, " +
+                    "$KEY_ID_EXERCISE INTEGER NOT NULL, " +
                     "$KEY_APPROACH TEXT NOT NULL, " +
                     "$KEY_REPEAT TEXT NOT NULL, " +
                     "$KEY_WORKLOAD TEXT NOT NULL, " +
-                    "FOREIGN KEY ($KEY_ID_TRAINING) REFERENCES $TABLE_TRAINING($KEY_ID_TRAINING) " +
+                    "FOREIGN KEY ($KEY_ID_TRAINING) REFERENCES $TABLE_TRAINING($KEY_ID_TRAINING), " +
                     "FOREIGN KEY ($KEY_ID_EXERCISE) REFERENCES $TABLE_EXERCISE($KEY_ID_EXERCISE)) ;")
 
 
