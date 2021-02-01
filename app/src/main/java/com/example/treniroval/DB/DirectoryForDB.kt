@@ -1,6 +1,5 @@
-package com.example.treniroval.DB
+ package com.example.treniroval.DB
 
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.treniroval.DB.DBHelper.Companion.KEY_APPROACH
 import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
@@ -13,7 +12,7 @@ import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
 import com.example.treniroval.ListItem.ListItemApproachInExercise
 import com.example.treniroval.ListItem.ListItemExerciseInTable
 
-var exercises: ArrayList<String> = ArrayList()
+ var exercises: ArrayList<String> = ArrayList()
 var trainingTopic: ArrayList<String> = ArrayList()
 var exerciseTraining: ArrayList<ListItemExerciseInTable> = ArrayList()
 
