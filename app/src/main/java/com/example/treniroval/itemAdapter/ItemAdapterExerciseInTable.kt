@@ -22,6 +22,7 @@ class ItemAdapterExerciseInTable(
 
         fun bind(listItemExerciseInTable: ListItemExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
+            //vot tyt ispolzovat adapter
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
             }

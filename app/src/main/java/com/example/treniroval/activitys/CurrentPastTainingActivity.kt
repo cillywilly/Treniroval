@@ -24,14 +24,11 @@ class CurrentPastTainingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_current_past_training)
 
-
-
         managerDB.openDb()
 
-
-        val listItems = managerDB.getCurrentTraining()
+        val listItems = managerDB.getCurrentTraining("1","1")
         val s: Cursor? =
-            managerDB.db?.rawQuery("select * from ${DBHelper.TABLE_TRAINING_EXERCISE}", null)
+            managerDB.db.rawQuery("select * from ${DBHelper.TABLE_TRAINING_EXERCISE}", null)
         if (s != null) {
             s.moveToFirst()
             println(s.getString(0))
@@ -42,12 +39,12 @@ class CurrentPastTainingActivity : Activity() {
         for (exercise in listItems) {
             println("YPRAGNENIE : "+exercise)
         }
-        managerDB.closeDb()
 
         currentPastTrainingList.hasFixedSize()
         currentPastTrainingList.layoutManager = LinearLayoutManager(this)
 
         currentPastTrainingList.adapter = ItemAdapterExerciseInTable(listItems, this)
+        managerDB.closeDb()
     }
 
 
