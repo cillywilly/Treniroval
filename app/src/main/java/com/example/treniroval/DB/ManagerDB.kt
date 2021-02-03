@@ -15,6 +15,7 @@ import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.KEY_REPEAT
+import com.example.treniroval.DB.DBHelper.Companion.KEY_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.KEY_WORKLOAD
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
 import com.example.treniroval.ListItem.ListItemApproachInExercise
@@ -45,14 +46,14 @@ class ManagerDB(context: Context) {
         val dateTime = LocalDateTime.now()
         val value = ContentValues().apply {
             put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
-            when {
-                trainingTopic == "Тренировка ног" -> {
+            when (trainingTopic) {
+                "Тренировка ног" -> {
                     put(KEY_ID_TRAINING_TOPIC, 1)
                 }
-                trainingTopic == "Тренировка груди" -> {
+                "Тренировка груди" -> {
                     put(KEY_ID_TRAINING_TOPIC, 2)
                 }
-                trainingTopic == "Тренировка спины" -> {
+                "Тренировка спины" -> {
                     put(KEY_ID_TRAINING_TOPIC, 3)
                 }
             }
@@ -68,7 +69,11 @@ class ManagerDB(context: Context) {
         val cursor =
             db?.query(Companion.TABLE_TRAINING, null, null, null, null, null, KEY_ID_TRAINING)
         while (cursor?.moveToNext()!!) {
-            val trainingTopic = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
+            val trainingTopicID = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
+            val cursor1 = db?.query(Companion.TABLE_TRAINING_TOPIC,
+                null, "$KEY_ID_TRAINING_TOPIC = $trainingTopicID", null, null, null, null)
+            cursor1?.moveToFirst()!!
+            val trainingTopic = cursor1.getString(cursor1.getColumnIndex(KEY_TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(KEY_DATE))
             listItems.add(ListItemPastTraining(trainingTopic, date))
         }
@@ -112,8 +117,8 @@ class ManagerDB(context: Context) {
 
         cursor?.moveToFirst()
         while (cursor?.moveToNext()!!) {
-                val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
-                val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
+            val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
+            val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
             val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
             val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
             val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
