@@ -29,8 +29,8 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
     val exercise = ListItemExerciseInTable("Приседания со штангой", approaches)
     exerciseTraining.add(exercise)
 
-    for (exercis in exerciseTraining) {
-        for (approach in exercis.listItemApproachInExercise) {
+    for (appproach in exerciseTraining) {
+        for (approach in appproach.listItemApproachInExercise) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "(${DBHelper.KEY_ID_TRAINING}, ${DBHelper.KEY_ID_EXERCISE},$KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +

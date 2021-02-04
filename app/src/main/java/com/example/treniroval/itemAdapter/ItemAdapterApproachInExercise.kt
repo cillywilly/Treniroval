@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.treniroval.ListItem.ListItemApproachInExercise
 import com.example.treniroval.R
@@ -13,9 +13,11 @@ import com.example.treniroval.R
 class ItemAdapterApproachInExercise(
     private val listItemApproachInExercise: ArrayList<ListItemApproachInExercise>,
     context: Context
-):  BaseAdapter() {
+//):  BaseAdapter() {
+): ArrayAdapter<ListItemApproachInExercise>(context, R.layout.item_aproach_in_exercise, listItemApproachInExercise) {
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
 
     override fun getCount(): Int {
         return listItemApproachInExercise.size

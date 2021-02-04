@@ -27,7 +27,8 @@ class ItemAdapterExerciseInTable(
             val adapter = ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
             approach.adapter = adapter
 
-            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
+//            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
+
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
