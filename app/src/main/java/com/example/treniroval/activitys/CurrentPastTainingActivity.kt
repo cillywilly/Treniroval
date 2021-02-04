@@ -24,6 +24,13 @@ class CurrentPastTainingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_current_past_training)
 
+//        var list: ArrayList<String> = ArrayList()
+//        list.add("QWe")
+//        list.add("123")
+//        val adapter1 : ArrayAdapter<String> = ArrayAdapter(this, R.layout.item_exercise_in_table, list )
+//        val approachesList : ListView = findViewById(R.id.approachesListView)
+//        approachesList.adapter = adapter1
+
         managerDB.openDb()
 
         val listItems = managerDB.getCurrentTraining("1","1")

@@ -95,12 +95,13 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getCurrentTraining(trainingId: String, exerciseId:String): ArrayList<ListItemExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ListItemExerciseInTable>()
+        val approaches : ArrayList<ListItemApproachInExercise> = ArrayList()
         val cursor = db.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
             "$KEY_ID_TRAINING='$trainingId' and $KEY_ID_EXERCISE='$exerciseId'",
             null, null, null, KEY_ID_TRAINING_EXERCISE
         )
-        cursor?.moveToFirst()
+//        cursor?.moveToFirst()
         while (cursor?.moveToNext()!!) {
                 val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
                 val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
@@ -108,13 +109,15 @@ class ManagerDB(context: Context) {
             val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
             val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
             val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
+            approaches.add(ListItemApproachInExercise(numOfApproach, sumOfRepeats, workLoad))
             listItemExerciseInTable.add(
                 ListItemExerciseInTable(
                     exerciseName,
-                    ListItemApproachInExercise(numOfApproach, sumOfRepeats, workLoad)
+                    approaches
                 )
             )
         }
+
         return listItemExerciseInTable
     }
 
@@ -130,93 +133,3 @@ class ManagerDB(context: Context) {
         return cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME))
     }
 }
-
-//-- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-//-- SET FOREIGN_KEY_CHECKS=0;
-//
-//-- ---
-//-- Table 'TABLE_TRAINING'
-//--
-//-- ---
-//
-//DROP TABLE IF EXISTS `TABLE_TRAINING`;
-//
-//CREATE TABLE `TABLE_TRAINING` (
-//`KEY_ID_TRAINING` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-//`KEY_ID_TRAINING_TOPIC` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-//`KEY_DATE` INTEGER NULL DEFAULT NULL,
-//PRIMARY KEY (`KEY_ID_TRAINING`)
-//);
-//
-//-- ---
-//-- Table 'TABLE_EXERCISE'
-//--
-//-- ---
-//
-//DROP TABLE IF EXISTS `TABLE_EXERCISE`;
-//
-//CREATE TABLE `TABLE_EXERCISE` (
-//`KEY_ID_EXERCISE` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-//`KEY_EXERCISE_NAME` INTEGER NULL DEFAULT NULL,
-//PRIMARY KEY (`KEY_ID_EXERCISE`)
-//);
-//
-//-- ---
-//-- Table 'TABLE_TRAINING_EXERCISE'
-//--
-//-- ---
-//
-//DROP TABLE IF EXISTS `TABLE_TRAINING_EXERCISE`;
-//
-//CREATE TABLE `TABLE_TRAINING_EXERCISE` (
-//`KEY_ID_TRAINING_EXERCISE` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-//`KEY_ID_TRAINING` INTEGER NULL DEFAULT NULL,
-//`KEY_ID_EXERCISE` INTEGER NULL DEFAULT NULL,
-//`KEY_APPROACH` INTEGER NULL DEFAULT NULL,
-//`KEY_REPEAT` INTEGER NULL DEFAULT NULL,
-//`KEY_WORKLOAD` INTEGER NULL DEFAULT NULL,
-//PRIMARY KEY (`KEY_ID_TRAINING_EXERCISE`)
-//);
-//
-//-- ---
-//-- Table 'TABLE_TRAINING_TOPIC'
-//--
-//-- ---
-//
-//DROP TABLE IF EXISTS `TABLE_TRAINING_TOPIC`;
-//
-//CREATE TABLE `TABLE_TRAINING_TOPIC` (
-//`KEY_ID_TRAINING_TOPIC` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-//`KEY_TRAINING_TOPIC` INTEGER NULL DEFAULT NULL,
-//PRIMARY KEY (`KEY_ID_TRAINING_TOPIC`)
-//);
-//
-//-- ---
-//-- Foreign Keys
-//-- ---
-//
-//ALTER TABLE `TABLE_TRAINING` ADD FOREIGN KEY (KEY_ID_TRAINING_TOPIC) REFERENCES `TABLE_TRAINING_TOPIC` (`KEY_ID_TRAINING_TOPIC`);
-//ALTER TABLE `TABLE_TRAINING_EXERCISE` ADD FOREIGN KEY (KEY_ID_TRAINING) REFERENCES `TABLE_TRAINING` (`KEY_ID_TRAINING`);
-//ALTER TABLE `TABLE_TRAINING_EXERCISE` ADD FOREIGN KEY (KEY_ID_EXERCISE) REFERENCES `TABLE_EXERCISE` (`KEY_ID_EXERCISE`);
-//
-//-- ---
-//-- Table Properties
-//-- ---
-//
-//-- ALTER TABLE `TABLE_TRAINING` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-//-- ALTER TABLE `TABLE_EXERCISE` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-//-- ALTER TABLE `TABLE_TRAINING_EXERCISE` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-//-- ALTER TABLE `TABLE_TRAINING_TOPIC` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-//
-//-- ---
-//-- Test Data
-//-- ---
-//
-//-- INSERT INTO `TABLE_TRAINING` (`KEY_ID_TRAINING`,`KEY_ID_TRAINING_TOPIC`,`KEY_DATE`) VALUES (1, 1, 01/01/2020);
-//-- ('','','');
-//-- INSERT INTO `TABLE_EXERCISE` (`KEY_ID_EXERCISE`,`KEY_EXERCISE_NAME`) VALUES (1, 'prised');
-//-- ('','');
-//-- INSERT INTO `TABLE_TRAINING_EXERCISE` (`KEY_ID_TRAINING_EXERCISE`,`KEY_ID_TRAINING`,`KEY_ID_EXERCISE`,`KEY_APPROACH`,`KEY_REPEAT`,`KEY_WORKLOAD`) VALUES (1, 1, 1, 1, 1, 1);
-//-- ('','','','','','');
-//-- INSERT INTO `TABLE_TRAINING_TOPIC` (`KEY_ID_TRAINING_TOPIC`,`KEY_TRAINING_TOPIC`) VALUES (1, 'topic');
-//-- ('','');

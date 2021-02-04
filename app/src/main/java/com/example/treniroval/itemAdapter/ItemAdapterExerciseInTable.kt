@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.treniroval.ListItem.ListItemExerciseInTable
@@ -19,10 +20,15 @@ class ItemAdapterExerciseInTable(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInPastTrainings)
+        private val approach = view.findViewById<ListView>(R.id.approachesListView)
 
         fun bind(listItemExerciseInTable: ListItemExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
-            //vot tyt ispolzovat adapter
+            val adapter = ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
+            approach.adapter = adapter
+
+            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
+
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
             }
