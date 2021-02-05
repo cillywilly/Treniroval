@@ -97,16 +97,16 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getCurrentTraining(
         trainingId: String,
-        exerciseId: String
     ): ArrayList<ListItemExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ListItemExerciseInTable>()
         val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
-        var exerciseName:String ="BEZ NAZVANIYA"
+        var exerciseName ="BEZ NAZVANIYA"
         val cursor = db.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
-            "$KEY_ID_TRAINING='$trainingId' and $KEY_ID_EXERCISE='$exerciseId'",
+            "$KEY_ID_TRAINING='$trainingId'",
             null, null, null, KEY_ID_TRAINING_EXERCISE
         )
+//        for (exercise in ) tyt nujno norm razobrat.
         while (cursor?.moveToNext()!!) {
             val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
             val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))

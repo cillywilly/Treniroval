@@ -33,7 +33,7 @@ class CurrentPastTainingActivity : Activity() {
 
         managerDB.openDb()
 
-        val listItems = managerDB.getCurrentTraining("1","1")
+        val listItems = managerDB.getCurrentTraining("1")
         val s: Cursor? =
             managerDB.db.rawQuery("select * from ${DBHelper.TABLE_TRAINING_EXERCISE}", null)
         if (s != null) {
@@ -51,7 +51,8 @@ class CurrentPastTainingActivity : Activity() {
         currentPastTrainingList.layoutManager = LinearLayoutManager(this)
 
         currentPastTrainingList.adapter = ItemAdapterExerciseInTable(listItems, this)
-        managerDB.closeDb()
+
+                managerDB.closeDb()
     }
 
 

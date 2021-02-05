@@ -15,6 +15,7 @@ class ItemAdapterApproachInExercise(
     context: Context
 //):  BaseAdapter() {
 ): ArrayAdapter<ListItemApproachInExercise>(context, R.layout.item_aproach_in_exercise, listItemApproachInExercise) {
+
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

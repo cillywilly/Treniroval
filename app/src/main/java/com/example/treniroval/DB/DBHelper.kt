@@ -57,6 +57,7 @@ class DBHelper(context: Context?) :
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TRAINING)
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_TRAINING_EXERCISE)
         addExercise(sqLiteDatabase)
+//        addExercise(sqLiteDatabase)
         addTrainingTopic(sqLiteDatabase)
         addApproach(sqLiteDatabase)
 

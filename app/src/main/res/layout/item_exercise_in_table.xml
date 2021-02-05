@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ItemLayout.item_layout_exercise"
     tools:ignore="MissingDefaultResource">
 
-    <ListView
-        android:id="@+id/approachesListView"
-        android:layout_width="314dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
-        app:layout_constraintStart_toEndOf="@+id/exerciseNameInPastTrainings"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/approachLinearLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    </ListView>
+        <TextView
+            android:id="@+id/exerciseNameInPastTrainings"
+            android:layout_width="96dp"
+            android:layout_height="41dp"
+            android:text="@string/Exercise" />
 
-    <TextView
-        android:id="@+id/exerciseNameInPastTrainings"
-        android:layout_width="96dp"
-        android:layout_height="41dp"
-        android:text="@string/Exercise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ListView
+            android:id="@+id/approachesListView"
+            android:layout_width="313dp"
+            android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        </ListView>
+<!--    </LinearLayout>-->
+
+</LinearLayout>

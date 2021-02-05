@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.treniroval.ListItem.ListItemExerciseInTable
 import com.example.treniroval.R
 
+
 class ItemAdapterExerciseInTable(
     listItemExerciseInTable: ArrayList<ListItemExerciseInTable>,
     context: Context
@@ -21,14 +22,22 @@ class ItemAdapterExerciseInTable(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInPastTrainings)
         private val approach = view.findViewById<ListView>(R.id.approachesListView)
+//        private val linearLayout = view.findViewById<LinearLayout>(R.id.approachLinearLayout)
 
         fun bind(listItemExerciseInTable: ListItemExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
-            val adapter = ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
+            val adapter = ItemAdapterApproachInExercise(
+                listItemExerciseInTable.listItemApproachInExercise,
+                context
+            )
             approach.adapter = adapter
 
 //            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
 
+//            linearLayout.orientation = LinearLayout.HORIZONTAL
+//            val i = listItemExerciseInTable.listItemApproachInExercise.size
+//            linearLayout.setHeight //= 40*i
+//            linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
@@ -38,7 +47,13 @@ class ItemAdapterExerciseInTable(
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val inflater = LayoutInflater.from(contextR)
-        return ItemAdapterExerciseInTable.ViewHolder(inflater.inflate(R.layout.item_exercise_in_table, p0,false))
+        return ItemAdapterExerciseInTable.ViewHolder(
+            inflater.inflate(
+                R.layout.item_exercise_in_table,
+                p0,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

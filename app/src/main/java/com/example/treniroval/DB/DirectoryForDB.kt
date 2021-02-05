@@ -39,6 +39,16 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
                         "'${approach.load}');"
             )
         }}
+    for (appproach in exerciseTraining) {
+        for (approach in appproach.listItemApproachInExercise) {
+            sqLiteDatabase.execSQL(
+                "INSERT INTO $TABLE_TRAINING_EXERCISE" +
+                        "(${DBHelper.KEY_ID_TRAINING}, ${DBHelper.KEY_ID_EXERCISE},$KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +
+                        "VALUES('1', '2','${approach.approachNumber}', " +
+                        "'${approach.repeatSum}', " +
+                        "'${approach.load}');"
+            )
+        }}
 }
 
 fun addExercise(sqLiteDatabase: SQLiteDatabase) {
