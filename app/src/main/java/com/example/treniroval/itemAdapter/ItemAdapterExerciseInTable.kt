@@ -1,10 +1,12 @@
 package com.example.treniroval.itemAdapter
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,7 +24,7 @@ class ItemAdapterExerciseInTable(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInPastTrainings)
         private val approach = view.findViewById<ListView>(R.id.approachesListView)
-//        private val linearLayout = view.findViewById<LinearLayout>(R.id.approachLinearLayout)
+        private val linearLayout = view.findViewById<LinearLayout>(R.id.approachLinearLayout)
 
         fun bind(listItemExerciseInTable: ListItemExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
@@ -35,9 +37,9 @@ class ItemAdapterExerciseInTable(
 //            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
 
 //            linearLayout.orientation = LinearLayout.HORIZONTAL
-//            val i = listItemExerciseInTable.listItemApproachInExercise.size
+            val i = listItemExerciseInTable.listItemApproachInExercise.size
 //            linearLayout.setHeight //= 40*i
-//            linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
+            linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()

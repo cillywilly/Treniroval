@@ -107,9 +107,10 @@ class ManagerDB(context: Context) {
             null, null, null, KEY_ID_TRAINING_EXERCISE
         )
         exerciseCursor.moveToLast()
-        val exercise: Int =
+        val exercises: Int =
             exerciseCursor.getInt(exerciseCursor.getColumnIndex(KEY_ID_EXERCISE))
-        for (i in 1..exercise) {
+        for (i in 1..exercises) {
+            approaches.clear()
             val cursor = db.query(
                 Companion.TABLE_TRAINING_EXERCISE, null,
                 "$KEY_ID_TRAINING='$trainingId' and $KEY_ID_EXERCISE='$i'",
