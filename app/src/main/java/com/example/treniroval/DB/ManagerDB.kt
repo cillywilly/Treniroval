@@ -138,6 +138,18 @@ class ManagerDB(context: Context) {
         return listItemExerciseInTable
     }
 
+    fun select() {
+
+    }
+
+    fun update() {
+
+    }
+
+    fun insert() {
+
+    }
+
     fun closeDb() {
         db.close()
     }
