@@ -100,25 +100,40 @@ class ManagerDB(context: Context) {
     ): ArrayList<ListItemExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ListItemExerciseInTable>()
         val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
-        var exerciseName ="BEZ NAZVANIYA"
-        val cursor = db.query(
+        var exerciseName = "BEZ NAZVANIYA"
+        val exerciseCursor = db.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
             "$KEY_ID_TRAINING='$trainingId'",
             null, null, null, KEY_ID_TRAINING_EXERCISE
         )
-//        for (exercise in ) tyt nujno norm razobrat.
-        while (cursor?.moveToNext()!!) {
-            val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
-            val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
-            exerciseName = getExerciseName(db, idExercise)
-            val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
-            val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
-            val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
-            approaches.add(ListItemApproachInExercise(numOfApproach, sumOfRepeats, workLoad))
+        exerciseCursor.moveToLast()
+        val exercise: Int =
+            exerciseCursor.getInt(exerciseCursor.getColumnIndex(KEY_ID_EXERCISE))
+        for (i in 1..exercise) {
+            val cursor = db.query(
+                Companion.TABLE_TRAINING_EXERCISE, null,
+                "$KEY_ID_TRAINING='$trainingId' and $KEY_ID_EXERCISE='$i'",
+                null, null, null, KEY_ID_TRAINING_EXERCISE
+            )
+            while (cursor?.moveToNext()!!) {
+                val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
+                val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
+                exerciseName = getExerciseName(db, idExercise)
+                val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
+                val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
+                val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
+                approaches.add(
+                    ListItemApproachInExercise(
+                        numOfApproach,
+                        sumOfRepeats,
+                        workLoad
+                    )
+                )
+            }
+            listItemExerciseInTable.add(
+                ListItemExerciseInTable(exerciseName, approaches)
+            )
         }
-        listItemExerciseInTable.add(
-            ListItemExerciseInTable(exerciseName, approaches)
-        )
         return listItemExerciseInTable
     }
 
