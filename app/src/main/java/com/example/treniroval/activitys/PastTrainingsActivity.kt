@@ -21,8 +21,6 @@ class PastTrainingsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_past_trainings)
 
-
-
         managerDB.openDb()
         val listItems = managerDB.getPastTrainings()
         managerDB.closeDb()

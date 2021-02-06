@@ -29,6 +29,8 @@ class ItemAdapterPastTraining(
             itemView.setOnClickListener {
 //                val intent = Intent(context, TrainingActivity::class.java)
                 val intent = Intent(context, CurrentPastTainingActivity::class.java)
+                intent.putExtra("trainingName",trainingName.text )
+                intent.putExtra("trainingDate",trainingDate.text)
                 startActivity(context, intent,null)
             }
         }

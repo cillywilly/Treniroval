@@ -16,20 +16,19 @@ import com.example.treniroval.itemAdapter.ItemAdapterExerciseInTable
 import kotlinx.android.synthetic.main.activity_current_past_training.*
 
 class CurrentPastTainingActivity : Activity() {
-    private var managerDB= ManagerDB(this)
+    private var managerDB = ManagerDB(this)
+//    private val tnt = findViewById<TextView>(R.id.trainingNameInTraining)
+//    private val tdt = findViewById<TextView>(R.id.trainingDateInTraining)
 
     @SuppressLint("Recycle")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_current_past_training)
-
-//        var list: ArrayList<String> = ArrayList()
-//        list.add("QWe")
-//        list.add("123")
-//        val adapter1 : ArrayAdapter<String> = ArrayAdapter(this, R.layout.item_exercise_in_table, list )
-//        val approachesList : ListView = findViewById(R.id.approachesListView)
-//        approachesList.adapter = adapter1
+        trainingNameInTraining.text= intent.getStringExtra("trainingName")
+        trainingDateInTraining.text= intent.getStringExtra("trainingDate")
+//        tnt.text = intent.getStringExtra("trainingName")
+//        tdt.text = intent.getStringExtra("trainingDate")
 
         managerDB.openDb()
 
@@ -44,7 +43,7 @@ class CurrentPastTainingActivity : Activity() {
 
 
         for (exercise in listItems) {
-            println("YPRAGNENIE : "+exercise)
+            println("YPRAGNENIE : " + exercise)
         }
 
         currentPastTrainingList.hasFixedSize()
@@ -52,7 +51,7 @@ class CurrentPastTainingActivity : Activity() {
 
         currentPastTrainingList.adapter = ItemAdapterExerciseInTable(listItems, this)
 
-                managerDB.closeDb()
+        managerDB.closeDb()
     }
 
 

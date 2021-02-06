@@ -20,13 +20,13 @@
 
         <TextView
             android:id="@+id/exerciseNameInPastTrainings"
-            android:layout_width="96dp"
+            android:layout_width="85dp"
             android:layout_height="match_parent"
             android:text="@string/Exercise" />
 
         <ListView
             android:id="@+id/approachesListView"
-            android:layout_width="313dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </ListView>
