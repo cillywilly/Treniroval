@@ -138,16 +138,11 @@ class ManagerDB(context: Context) {
         return listItemExerciseInTable
     }
 
-    fun select() {
-
-    }
-
-    fun update() {
-
-    }
-
-    fun insert() {
-
+    @SuppressLint("Recycle")
+    fun select(db: SQLiteDatabase, table: String, selection: String, column: String): String {
+        val cursor = db.query(table, null, selection, null, null, null, null)
+        cursor.moveToFirst()
+        return cursor.getString(cursor.getColumnIndex(column))
     }
 
     fun closeDb() {
