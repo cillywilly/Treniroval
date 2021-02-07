@@ -1,20 +1,20 @@
 package com.example.treniroval.DB
 
 import android.database.sqlite.SQLiteDatabase
-import com.example.treniroval.DB.DBHelper.Companion.KEY_APPROACH
-import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
-import com.example.treniroval.DB.DBHelper.Companion.KEY_REPEAT
-import com.example.treniroval.DB.DBHelper.Companion.KEY_TRAINING_TOPIC
-import com.example.treniroval.DB.DBHelper.Companion.KEY_WORKLOAD
+import com.example.treniroval.DB.DBHelper.Companion.APPROACH
+import com.example.treniroval.DB.DBHelper.Companion.EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.REPEAT
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
+import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.ListItem.ListItemApproachInExercise
-import com.example.treniroval.ListItem.ListItemExerciseInTable
 
 var exercises: ArrayList<String> = ArrayList()
 var trainingTopic: ArrayList<String> = ArrayList()
-var exerciseTraining: ArrayList<ListItemExerciseInTable> = ArrayList()
+var exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
 
 fun addApproach(sqLiteDatabase: SQLiteDatabase) {
     val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
@@ -26,14 +26,14 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
         val approachInExercise = ListItemApproachInExercise(app, rep, loa)
         approaches.add(approachInExercise)
     }
-    val exercise = ListItemExerciseInTable("Приседания со штангой", approaches)
+    val exercise = ExerciseInTable("Приседания со штангой", approaches)
     exerciseTraining.add(exercise)
 
     for (appproach in exerciseTraining) {
         for (approach in appproach.listItemApproachInExercise) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
-                        "(${DBHelper.KEY_ID_TRAINING}, ${DBHelper.KEY_ID_EXERCISE},$KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +
+                        "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +
                         "VALUES('1', '1','${approach.approachNumber}', " +
                         "'${approach.repeatSum}', " +
                         "'${approach.load}');"
@@ -43,7 +43,7 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
         for (approach in appproach.listItemApproachInExercise) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
-                        "(${DBHelper.KEY_ID_TRAINING}, ${DBHelper.KEY_ID_EXERCISE},$KEY_APPROACH,$KEY_REPEAT,$KEY_WORKLOAD) " +
+                        "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +
                         "VALUES('1', '2','${approach.approachNumber}', " +
                         "'${approach.repeatSum}', " +
                         "'${approach.load}');"
@@ -71,9 +71,9 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
     exercises.add("Тяга нижнего блока к поясу")
 
     exercises.add("Пресс")
-    exercises.add("")
+//    exercises.add("")
     for (exercise in exercises) {
-        sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($KEY_EXERCISE_NAME) VALUES('$exercise');")
+        sqLiteDatabase.execSQL("INSERT INTO $TABLE_EXERCISE($EXERCISE_NAME) VALUES('$exercise');")
     }
     //так можно саутить из базы)
 //    val s: Cursor = sqLiteDatabase.rawQuery("select * from $TABLE_EXERCISE", null)
@@ -88,6 +88,6 @@ fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
     trainingTopic.add("Тренировка ног")
     trainingTopic.add("Тренировка груди")
     trainingTopic.add("Тренировка спины")
-    for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($KEY_TRAINING_TOPIC) VALUES('$trainingTopic');")
+    for (trainingTopic in trainingTopic) sqLiteDatabase.execSQL("INSERT INTO $TABLE_TRAINING_TOPIC($TRAINING_TOPIC) VALUES('$trainingTopic');")
 }
 

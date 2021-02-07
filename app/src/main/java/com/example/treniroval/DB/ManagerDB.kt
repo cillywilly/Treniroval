@@ -7,21 +7,21 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import android.support.annotation.RequiresApi
 import com.example.treniroval.DB.DBHelper.Companion
-import com.example.treniroval.DB.DBHelper.Companion.KEY_APPROACH
-import com.example.treniroval.DB.DBHelper.Companion.KEY_DATE
-import com.example.treniroval.DB.DBHelper.Companion.KEY_EXERCISE_NAME
-import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_EXERCISE
-import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING
-import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_EXERCISE
-import com.example.treniroval.DB.DBHelper.Companion.KEY_ID_TRAINING_TOPIC
-import com.example.treniroval.DB.DBHelper.Companion.KEY_REPEAT
-import com.example.treniroval.DB.DBHelper.Companion.KEY_TRAINING_TOPIC
-import com.example.treniroval.DB.DBHelper.Companion.KEY_WORKLOAD
+import com.example.treniroval.DB.DBHelper.Companion.APPROACH
+import com.example.treniroval.DB.DBHelper.Companion.DATE
+import com.example.treniroval.DB.DBHelper.Companion.EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.ID_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING
+import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.REPEAT
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
+import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
+import com.example.treniroval.ListItem.Exercise
+import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.ListItem.ListItemApproachInExercise
-import com.example.treniroval.ListItem.ListItemExercise
-import com.example.treniroval.ListItem.ListItemExerciseInTable
-import com.example.treniroval.ListItem.ListItemPastTraining
+import com.example.treniroval.ListItem.PastTraining
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -45,16 +45,16 @@ class ManagerDB(context: Context) {
     fun insertTraining(trainingTopic: String) {
         val dateTime = LocalDateTime.now()
         val value = ContentValues().apply {
-            put(KEY_DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
+            put(DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
             when (trainingTopic) {
                 "Тренировка ног" -> {
-                    put(KEY_ID_TRAINING_TOPIC, 1)
+                    put(ID_TRAINING_TOPIC, 1)
                 }
                 "Тренировка груди" -> {
-                    put(KEY_ID_TRAINING_TOPIC, 2)
+                    put(ID_TRAINING_TOPIC, 2)
                 }
                 "Тренировка спины" -> {
-                    put(KEY_ID_TRAINING_TOPIC, 3)
+                    put(ID_TRAINING_TOPIC, 3)
                 }
             }
         }
@@ -64,32 +64,36 @@ class ManagerDB(context: Context) {
     }
 
     @SuppressLint("Recycle")
-    fun getPastTrainings(): ArrayList<ListItemPastTraining> {
-        val listItems = ArrayList<ListItemPastTraining>()
+    fun getPastTrainings(): ArrayList<PastTraining> {
+        val listItems = ArrayList<PastTraining>()
         val cursor =
-            db.query(Companion.TABLE_TRAINING, null, null, null, null, null, KEY_ID_TRAINING)
+            db.query(Companion.TABLE_TRAINING, null, null, null, null, null, ID_TRAINING)
         while (cursor?.moveToNext()!!) {
-            val trainingTopicID = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING_TOPIC))
+            val trainingTopicID = cursor.getString(cursor.getColumnIndex(ID_TRAINING_TOPIC))
             val cursor1 = db.query(
                 Companion.TABLE_TRAINING_TOPIC,
-                null, "$KEY_ID_TRAINING_TOPIC = $trainingTopicID", null, null, null, null
+                null, "$ID_TRAINING_TOPIC = $trainingTopicID", null, null, null, null
             )
             cursor1?.moveToFirst()!!
-            val trainingTopic = cursor1.getString(cursor1.getColumnIndex(KEY_TRAINING_TOPIC))
-            val date = cursor.getString(cursor.getColumnIndex(KEY_DATE))
-            listItems.add(ListItemPastTraining(trainingTopic, date))
+            val trainingTopic = cursor1.getString(cursor1.getColumnIndex(TRAINING_TOPIC))
+            val date = cursor.getString(cursor.getColumnIndex(DATE))
+            listItems.add(PastTraining(trainingTopic, date))
         }
         return listItems
     }
 
     @SuppressLint("Recycle")
-    fun getExercises(): ArrayList<ListItemExercise> {
-        val listItemExercise = ArrayList<ListItemExercise>()
+    fun getExercises(): ArrayList<Exercise> {
+        val listItemExercise = ArrayList<Exercise>()
         val cursor =
-            db.query(Companion.TABLE_EXERCISE, null, null, null, null, null, KEY_ID_EXERCISE)
+            db.query(Companion.TABLE_EXERCISE, null, null, null, null, null, ID_EXERCISE)
         while (cursor?.moveToNext()!!) {
-            val exercise = cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME))
-            listItemExercise.add(ListItemExercise(exercise))
+            val exercise = cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
+            var exercise2 = ""
+            if (cursor.moveToNext()) {
+                exercise2 = cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
+            }
+            listItemExercise.add(Exercise(exercise, exercise2))
         }
         return listItemExercise
     }
@@ -97,32 +101,32 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getCurrentTraining(
         trainingId: String,
-    ): ArrayList<ListItemExerciseInTable> {
-        val listItemExerciseInTable = ArrayList<ListItemExerciseInTable>()
+    ): ArrayList<ExerciseInTable> {
+        val listItemExerciseInTable = ArrayList<ExerciseInTable>()
         val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
         var exerciseName = "BEZ NAZVANIYA"
         val exerciseCursor = db.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
-            "$KEY_ID_TRAINING='$trainingId'",
-            null, null, null, KEY_ID_TRAINING_EXERCISE
+            "$ID_TRAINING='$trainingId'",
+            null, null, null, ID_TRAINING_EXERCISE
         )
         exerciseCursor.moveToLast()
         val exercises: Int =
-            exerciseCursor.getInt(exerciseCursor.getColumnIndex(KEY_ID_EXERCISE))
+            exerciseCursor.getInt(exerciseCursor.getColumnIndex(ID_EXERCISE))
         for (i in 1..exercises) {
             approaches.clear()
             val cursor = db.query(
                 Companion.TABLE_TRAINING_EXERCISE, null,
-                "$KEY_ID_TRAINING='$trainingId' and $KEY_ID_EXERCISE='$i'",
-                null, null, null, KEY_ID_TRAINING_EXERCISE
+                "$ID_TRAINING='$trainingId' and $ID_EXERCISE='$i'",
+                null, null, null, ID_TRAINING_EXERCISE
             )
             while (cursor?.moveToNext()!!) {
-                val idTraining = cursor.getString(cursor.getColumnIndex(KEY_ID_TRAINING))
-                val idExercise = cursor.getString(cursor.getColumnIndex(KEY_ID_EXERCISE))
+                val idTraining = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
+                val idExercise = cursor.getString(cursor.getColumnIndex(ID_EXERCISE))
                 exerciseName = getExerciseName(db, idExercise)
-                val numOfApproach = cursor.getString(cursor.getColumnIndex(KEY_APPROACH))
-                val sumOfRepeats = cursor.getString(cursor.getColumnIndex(KEY_REPEAT))
-                val workLoad = cursor.getString(cursor.getColumnIndex(KEY_WORKLOAD))
+                val numOfApproach = cursor.getString(cursor.getColumnIndex(APPROACH))
+                val sumOfRepeats = cursor.getString(cursor.getColumnIndex(REPEAT))
+                val workLoad = cursor.getString(cursor.getColumnIndex(WORKLOAD))
                 approaches.add(
                     ListItemApproachInExercise(
                         numOfApproach,
@@ -132,7 +136,7 @@ class ManagerDB(context: Context) {
                 )
             }
             listItemExerciseInTable.add(
-                ListItemExerciseInTable(exerciseName, approaches)
+                ExerciseInTable(exerciseName, approaches)
             )
         }
         return listItemExerciseInTable
@@ -152,10 +156,10 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getExerciseName(db: SQLiteDatabase, exerciseId: String): String {
         val cursor = db.query(
-            Companion.TABLE_EXERCISE, null, "$KEY_ID_EXERCISE='$exerciseId'",
+            Companion.TABLE_EXERCISE, null, "$ID_EXERCISE='$exerciseId'",
             null, null, null, null
         )
         cursor.moveToFirst()
-        return cursor.getString(cursor.getColumnIndex(KEY_EXERCISE_NAME))
+        return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
     }
 }

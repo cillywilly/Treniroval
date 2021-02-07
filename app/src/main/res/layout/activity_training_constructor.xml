@@ -21,12 +21,13 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/exerciseList"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="500dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

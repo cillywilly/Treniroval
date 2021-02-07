@@ -12,28 +12,28 @@ class DBHelper(context: Context?) :
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         val SQL_CREATE_TABLE_EXERCISE =
             ("CREATE TABLE $TABLE_EXERCISE " +
-                    "($KEY_ID_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_EXERCISE_NAME TEXT NOT NULL) ;")
+                    "($ID_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "$EXERCISE_NAME TEXT NOT NULL) ;")
         val SQL_CREATE_TABLE_TRAINING_TOPIC =
             ("CREATE TABLE $TABLE_TRAINING_TOPIC " +
-                    "($KEY_ID_TRAINING_TOPIC INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_TRAINING_TOPIC TEXT NOT NULL) ;")
+                    "($ID_TRAINING_TOPIC INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "$TRAINING_TOPIC TEXT NOT NULL) ;")
         val SQL_CREATE_TABLE_TRAINING =
             ("CREATE TABLE $TABLE_TRAINING " +
-                    "($KEY_ID_TRAINING INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_ID_TRAINING_TOPIC INTEGER NOT NULL, " +
-                    "$KEY_DATE TEXT NOT NULL, " +
-                    "FOREIGN KEY ($KEY_ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($KEY_ID_TRAINING_TOPIC)) ;")
+                    "($ID_TRAINING INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "$ID_TRAINING_TOPIC INTEGER NOT NULL, " +
+                    "$DATE TEXT NOT NULL, " +
+                    "FOREIGN KEY ($ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($ID_TRAINING_TOPIC)) ;")
         val SQL_CREATE_TABLE_TRAINING_EXERCISE =
             ("CREATE TABLE $TABLE_TRAINING_EXERCISE" +
-                    " ($KEY_ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$KEY_ID_TRAINING INTEGER NOT NULL, " +
-                    "$KEY_ID_EXERCISE INTEGER NOT NULL, " +
-                    "$KEY_APPROACH TEXT NOT NULL, " +
-                    "$KEY_REPEAT TEXT NOT NULL, " +
-                    "$KEY_WORKLOAD TEXT NOT NULL, " +
-                    "FOREIGN KEY ($KEY_ID_TRAINING) REFERENCES $TABLE_TRAINING($KEY_ID_TRAINING), " +
-                    "FOREIGN KEY ($KEY_ID_EXERCISE) REFERENCES $TABLE_EXERCISE($KEY_ID_EXERCISE)) ;")
+                    " ($ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "$ID_TRAINING INTEGER NOT NULL, " +
+                    "$ID_EXERCISE INTEGER NOT NULL, " +
+                    "$APPROACH TEXT NOT NULL, " +
+                    "$REPEAT TEXT NOT NULL, " +
+                    "$WORKLOAD TEXT NOT NULL, " +
+                    "FOREIGN KEY ($ID_TRAINING) REFERENCES $TABLE_TRAINING($ID_TRAINING), " +
+                    "FOREIGN KEY ($ID_EXERCISE) REFERENCES $TABLE_EXERCISE($ID_EXERCISE)) ;")
 
 
 //        val SQL_CREATE_TABLE_TRAINING_EXERCISE =
@@ -78,25 +78,25 @@ class DBHelper(context: Context?) :
         const val DATABASE_NAME = "treniroval"
 
         const val TABLE_EXERCISE: String = "exercise" //таблица названий упражнений
-        const val KEY_ID_EXERCISE: String = "id_exercise" //ИД используется 2 раза это +(1)+
-        const val KEY_EXERCISE_NAME: String = "exercise_name" //название упражнения
+        const val ID_EXERCISE: String = "id_exercise" //ИД используется 2 раза это +(1)+
+        const val EXERCISE_NAME: String = "exercise_name" //название упражнения
 
         const val TABLE_TRAINING: String =
             "training" //таблица УНИКАЛЬНЫХ тренировок
-        const val KEY_ID_TRAINING: String = "id_training" //ИД
-        const val KEY_ID_TRAINING_TOPIC: String =
+        const val ID_TRAINING: String = "id_training" //ИД
+        const val ID_TRAINING_TOPIC: String =
             "id_training_topic" //ИД используется 2 раза это -(1)-
-        const val KEY_DATE: String = "date" //дата тренировки
+        const val DATE: String = "date" //дата тренировки
 
         const val TABLE_TRAINING_TOPIC: String = "training_topic"  //таблица названий тренировок
-        const val KEY_TRAINING_TOPIC: String = "training_topic" //название тренировки + -(2)-
+        const val TRAINING_TOPIC: String = "training_topic" //название тренировки + -(2)-
 
         const val TABLE_TRAINING_EXERCISE: String =
             "training_exercise" //таблица УНИКАЛЬНЫХ упражнений для ВСЕХ тренировок
-        const val KEY_ID_TRAINING_EXERCISE: String = "id_training_exercise" //ИД + +(2)+
-        const val KEY_APPROACH: String = "approach" //номер подхода
-        const val KEY_REPEAT: String = "repeat" //количество повторений
-        const val KEY_WORKLOAD: String = "workload" // нагрузка
+        const val ID_TRAINING_EXERCISE: String = "id_training_exercise" //ИД + +(2)+
+        const val APPROACH: String = "approach" //номер подхода
+        const val REPEAT: String = "repeat" //количество повторений
+        const val WORKLOAD: String = "workload" // нагрузка
     }
 }
 

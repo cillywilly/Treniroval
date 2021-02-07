@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import com.example.treniroval.ListItem.ListItemExercise
+import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.R
 
-class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExercise>, context: Context) :
+class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
     var listItemR = listArrayExercise
     var contextR = context
@@ -17,7 +17,7 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<ListItemExerci
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
 
-        fun bind(listItemExercise: ListItemExercise) {
+        fun bind(listItemExercise: Exercise) {
             exercise.text = listItemExercise.exercise
             println(exercise.text)
 //            itemView.setOnClickListener {

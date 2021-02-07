@@ -10,12 +10,12 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
-import com.example.treniroval.ListItem.ListItemExerciseInTable
+import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
 
 
 class ItemAdapterExerciseInTable(
-    listItemExerciseInTable: ArrayList<ListItemExerciseInTable>,
+    listItemExerciseInTable: ArrayList<ExerciseInTable>,
     context: Context
 ) : RecyclerView.Adapter<ItemAdapterExerciseInTable.ViewHolder>() {
     var listItemR = listItemExerciseInTable
@@ -26,7 +26,7 @@ class ItemAdapterExerciseInTable(
         private val approach = view.findViewById<ListView>(R.id.approachesListView)
         private val linearLayout = view.findViewById<LinearLayout>(R.id.approachLinearLayout)
 
-        fun bind(listItemExerciseInTable: ListItemExerciseInTable, context: Context) {
+        fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInExercise(
                 listItemExerciseInTable.listItemApproachInExercise,

@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.treniroval.ListItem.ListItemPastTraining
+import com.example.treniroval.ListItem.PastTraining
 import com.example.treniroval.R
 import com.example.treniroval.activitys.CurrentPastTainingActivity
 
 class ItemAdapterPastTraining(
-    listArrayPastTraining: ArrayList<ListItemPastTraining>,
+    listArrayPastTraining: ArrayList<PastTraining>,
     context: Context
 ) : RecyclerView.Adapter<ItemAdapterPastTraining.ViewHolder>() {
     var listItemR = listArrayPastTraining
@@ -23,7 +23,7 @@ class ItemAdapterPastTraining(
         private val trainingName = view.findViewById<TextView>(R.id.trainingName)
         private val trainingDate = view.findViewById<TextView>(R.id.trainingDate)
 
-        fun bind(listItemPastTraining: ListItemPastTraining, context: Context) {
+        fun bind(listItemPastTraining: PastTraining, context: Context) {
             trainingName.text = listItemPastTraining.trainingName
             trainingDate.text = listItemPastTraining.trainingDate
             itemView.setOnClickListener {
