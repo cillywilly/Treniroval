@@ -9,28 +9,26 @@ import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
+import com.example.treniroval.ListItem.ApproachInExerciseListItem
 import com.example.treniroval.ListItem.ExerciseInTable
-import com.example.treniroval.ListItem.ListItemApproachInExercise
 
-var exercises: ArrayList<String> = ArrayList()
-var trainingTopic: ArrayList<String> = ArrayList()
-var exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
 
 fun addApproach(sqLiteDatabase: SQLiteDatabase) {
-    val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
+    val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
+    val exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
 
     for (i in 1..4) {
         val app: String = i.toString()
         val rep: String = (8..12).random().toString()
         val loa: String = (40..70).random().toString()
-        val approachInExercise = ListItemApproachInExercise(app, rep, loa)
-        approaches.add(approachInExercise)
+        val approachInExercise = ApproachInExerciseListItem(app, rep, loa)
+        approachListItems.add(approachInExercise)
     }
-    val exercise = ExerciseInTable("Приседания со штангой", approaches)
+    val exercise = ExerciseInTable("Приседания со штангой", approachListItems)
     exerciseTraining.add(exercise)
 
     for (appproach in exerciseTraining) {
-        for (approach in appproach.listItemApproachInExercise) {
+        for (approach in appproach.approachInExerciseListItem) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +
@@ -40,7 +38,7 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
             )
         }}
     for (appproach in exerciseTraining) {
-        for (approach in appproach.listItemApproachInExercise) {
+        for (approach in appproach.approachInExerciseListItem) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +
@@ -52,6 +50,8 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
 }
 
 fun addExercise(sqLiteDatabase: SQLiteDatabase) {
+    val exercises: ArrayList<String> = ArrayList()
+
     exercises.add("Приседания со штангой")
     exercises.add("Жим ногами в тренажёре")
     exercises.add("Выпады")
@@ -85,6 +85,7 @@ fun addExercise(sqLiteDatabase: SQLiteDatabase) {
 }
 
 fun addTrainingTopic(sqLiteDatabase: SQLiteDatabase) {
+    val trainingTopic: ArrayList<String> = ArrayList()
     trainingTopic.add("Тренировка ног")
     trainingTopic.add("Тренировка груди")
     trainingTopic.add("Тренировка спины")

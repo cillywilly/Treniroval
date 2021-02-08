@@ -29,7 +29,7 @@ class ItemAdapterExerciseInTable(
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInExercise(
-                listItemExerciseInTable.listItemApproachInExercise,
+                listItemExerciseInTable.approachInExerciseListItem,
                 context
             )
             approach.adapter = adapter
@@ -37,7 +37,7 @@ class ItemAdapterExerciseInTable(
 //            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
 
 //            linearLayout.orientation = LinearLayout.HORIZONTAL
-            val i = listItemExerciseInTable.listItemApproachInExercise.size
+            val i = listItemExerciseInTable.approachInExerciseListItem.size
 //            linearLayout.setHeight //= 40*i
             linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
 

@@ -18,9 +18,9 @@ import com.example.treniroval.DB.DBHelper.Companion.REPEAT
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
+import com.example.treniroval.ListItem.ApproachInExerciseListItem
 import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.ListItem.ExerciseInTable
-import com.example.treniroval.ListItem.ListItemApproachInExercise
 import com.example.treniroval.ListItem.PastTraining
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -28,6 +28,21 @@ import java.time.format.DateTimeFormatter
 class ManagerDB(context: Context) {
     private val DBHelper = DBHelper(context)
     lateinit var db: SQLiteDatabase
+
+
+    @SuppressLint("Recycle")
+    fun getLastTrainingID(): String? {
+        openDb()
+        val cursor = db.query(
+            TABLE_TRAINING,
+            null, null, null, null, null, null
+        )
+        cursor.moveToLast()
+        var s = "0"
+        s = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
+        closeDb()
+        return s
+    }
 
     fun openDb() {
         db = DBHelper.writableDatabase
@@ -103,7 +118,7 @@ class ManagerDB(context: Context) {
         trainingId: String,
     ): ArrayList<ExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ExerciseInTable>()
-        val approaches: ArrayList<ListItemApproachInExercise> = ArrayList()
+        val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
         var exerciseName = "BEZ NAZVANIYA"
         val exerciseCursor = db.query(
             Companion.TABLE_TRAINING_EXERCISE, null,
@@ -114,7 +129,7 @@ class ManagerDB(context: Context) {
         val exercises: Int =
             exerciseCursor.getInt(exerciseCursor.getColumnIndex(ID_EXERCISE))
         for (i in 1..exercises) {
-            approaches.clear()
+            approachListItems.clear()
             val cursor = db.query(
                 Companion.TABLE_TRAINING_EXERCISE, null,
                 "$ID_TRAINING='$trainingId' and $ID_EXERCISE='$i'",
@@ -127,8 +142,8 @@ class ManagerDB(context: Context) {
                 val numOfApproach = cursor.getString(cursor.getColumnIndex(APPROACH))
                 val sumOfRepeats = cursor.getString(cursor.getColumnIndex(REPEAT))
                 val workLoad = cursor.getString(cursor.getColumnIndex(WORKLOAD))
-                approaches.add(
-                    ListItemApproachInExercise(
+                approachListItems.add(
+                    ApproachInExerciseListItem(
                         numOfApproach,
                         sumOfRepeats,
                         workLoad
@@ -136,11 +151,33 @@ class ManagerDB(context: Context) {
                 )
             }
             listItemExerciseInTable.add(
-                ExerciseInTable(exerciseName, approaches)
+                ExerciseInTable(exerciseName, approachListItems)
             )
         }
         return listItemExerciseInTable
     }
+
+    fun setExercisesList(exercisesNames: ArrayList<String>) {
+        val lastTrainigid = getLastTrainingID()
+//        val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
+//        val exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
+//
+//        val approachInExercise = ApproachInExerciseListItem("1", "0", "0")
+//        approachListItems.add(approachInExercise)
+        var count = 1
+        for (exerciseName in exercisesNames) {
+//            val exercise = ExerciseInTable(exerciseName, approachListItems)
+//            exerciseTraining.add(exercise)
+
+            db.execSQL(
+                "INSERT INTO ${Companion.TABLE_TRAINING_EXERCISE}" +
+                        "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
+                        "VALUES(${lastTrainigid}, $count,'1', '0', '0');"
+            )
+            count++
+        }
+    }
+
 
     @SuppressLint("Recycle")
     fun select(db: SQLiteDatabase, table: String, selection: String, column: String): String {

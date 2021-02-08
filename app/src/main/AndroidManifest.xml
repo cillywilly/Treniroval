@@ -12,7 +12,7 @@
         <activity android:name=".ItemLayout.item_layout_past_trainings"></activity>
         <activity android:name=".activitys.PastTrainingsActivity" />
         <activity android:name=".activitys.TrainingConstructorActivity" />
-        <activity android:name=".activitys.TrainingActivity" />
+        <activity android:name=".activitys.TrainingComplitedActivity" />
         <activity android:name=".activitys.SelectTrainingTopicActivity" />
         <activity android:name=".activitys.CurrentPastTainingActivity" />
             <activity android:name=".activitys.MainActivity" >

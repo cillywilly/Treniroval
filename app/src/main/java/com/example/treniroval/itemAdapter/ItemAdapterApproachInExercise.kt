@@ -7,25 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.treniroval.ListItem.ListItemApproachInExercise
+import com.example.treniroval.ListItem.ApproachInExerciseListItem
 import com.example.treniroval.R
 
 class ItemAdapterApproachInExercise(
-    private val listItemApproachInExercise: ArrayList<ListItemApproachInExercise>,
+    private val approachInExerciseListItem: ArrayList<ApproachInExerciseListItem>,
     context: Context
 //):  BaseAdapter() {
-): ArrayAdapter<ListItemApproachInExercise>(context, R.layout.item_aproach_in_exercise, listItemApproachInExercise) {
+): ArrayAdapter<ApproachInExerciseListItem>(context, R.layout.item_aproach_in_exercise, approachInExerciseListItem) {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
 
     override fun getCount(): Int {
-        return listItemApproachInExercise.size
+        return approachInExerciseListItem.size
     }
 
-    override fun getItem(position: Int): ListItemApproachInExercise {
-        return listItemApproachInExercise[position]
+    override fun getItem(position: Int): ApproachInExerciseListItem {
+        return approachInExerciseListItem[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -39,9 +39,9 @@ class ItemAdapterApproachInExercise(
         val povtoreniya = rowView.findViewById<TextView>(R.id.repeatInExercise)
         val kg = rowView.findViewById<TextView>(R.id.worckloadInExercise)
 
-        podhod.text = listItemApproachInExercise[position].approachNumber
-        povtoreniya.text = listItemApproachInExercise[position].repeatSum
-        kg.text = listItemApproachInExercise[position].load
+        podhod.text = approachInExerciseListItem[position].approachNumber
+        povtoreniya.text = approachInExerciseListItem[position].repeatSum
+        kg.text = approachInExerciseListItem[position].load
         return rowView
     }
 
