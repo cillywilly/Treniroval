@@ -32,7 +32,6 @@ class ManagerDB(context: Context) {
 
     @SuppressLint("Recycle")
     fun getLastTrainingID(): String? {
-        openDb()
         val cursor = db.query(
             TABLE_TRAINING,
             null, null, null, null, null, null
@@ -40,7 +39,6 @@ class ManagerDB(context: Context) {
         cursor.moveToLast()
         var s = "0"
         s = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
-        closeDb()
         return s
     }
 

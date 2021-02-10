@@ -18,7 +18,6 @@ class TrainingConstructorActivity : Activity() {
 
     private var managerDB= ManagerDB(this)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training_constructor)
@@ -45,6 +44,7 @@ class TrainingConstructorActivity : Activity() {
             if (findViewById<CheckBox>(R.id.exercise2).isChecked) {
                 exercises.add(exercise2.text as String)
             }
+            managerDB.openDb()
             managerDB.setExercisesList(exercises)
         }
     }

@@ -16,10 +16,31 @@ class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, con
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
+        private val exercise2 = view.findViewById<CheckBox>(R.id.exercise2)
+        public var selectedItems:ArrayList<String> = ArrayList()
+
+        init {
+            exercise.setOnCheckedChangeListener{
+                _,isChecked ->
+                if (isChecked) selectedItems.add(exercise.text as String)
+                if (!isChecked) selectedItems.remove(exercise.text as String)
+            }
+            exercise2.setOnCheckedChangeListener{
+                _,isChecked ->
+                if (isChecked) selectedItems.add(exercise2.text as String)
+                if (!isChecked) selectedItems.remove(exercise2.text as String)
+            }
+
+        }
 
         fun bind(listItemExercise: Exercise) {
+
             exercise.text = listItemExercise.exercise
+            exercise2.text = listItemExercise.exercise2
+
             println(exercise.text)
+            println(exercise2.text)
+
 //            itemView.setOnClickListener {
 //                Toast.makeText(context, "Pressed: ${exercise.text}", Toast.LENGTH_SHORT).show()
 //            }
