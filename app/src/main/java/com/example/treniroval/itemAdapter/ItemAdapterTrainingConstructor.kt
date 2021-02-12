@@ -9,15 +9,15 @@ import android.widget.CheckBox
 import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.R
 
-class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context) :
+        class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
     var listItemR = listArrayExercise
     var contextR = context
+    var selectedItems:ArrayList<String> = ArrayList()
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
         private val exercise2 = view.findViewById<CheckBox>(R.id.exercise2)
-        public var selectedItems:ArrayList<String> = ArrayList()
 
         init {
             exercise.setOnCheckedChangeListener{
