@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.treniroval.R
 
-class ChestWorkoutActivity : Activity() {
+class NewTrainingActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training_complited)
