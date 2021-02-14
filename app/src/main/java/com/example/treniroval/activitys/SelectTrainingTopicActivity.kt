@@ -8,11 +8,17 @@ import android.support.annotation.RequiresApi
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class SelectTrainingTopicActivity : Activity() {
 
-    private var managerDB= ManagerDB(this)
+    @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
+    val dateTime: LocalDateTime = LocalDateTime.now()
+    @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
+    val date = dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy"))
+    private var managerDB = ManagerDB(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,27 +29,27 @@ class SelectTrainingTopicActivity : Activity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickButtonChest(view: View) {
         managerDB.openDb()
-        managerDB.insertTraining("Тренировка груди")
+        managerDB.insertTraining("Тренировка груди", date)
         managerDB.closeDb()
-        val intent = Intent(this, TrainingConstructorActivity::class.java)
+         intent = Intent(this, TrainingConstructorActivity::class.java)
         startActivity(intent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickButtonLegs(view: View) {
         managerDB.openDb()
-        managerDB.insertTraining("Тренировка ног")
+        managerDB.insertTraining("Тренировка ног", date)
         managerDB.closeDb()
-        val intent = Intent(this, TrainingConstructorActivity::class.java)
+         intent = Intent(this, TrainingConstructorActivity::class.java)
         startActivity(intent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickButtonBack(view: View) {
         managerDB.openDb()
-        managerDB.insertTraining("Тренировка спины")
+        managerDB.insertTraining("Тренировка спины", date)
         managerDB.closeDb()
-        val intent = Intent(this, TrainingConstructorActivity::class.java)
+         intent = Intent(this, TrainingConstructorActivity::class.java)
         startActivity(intent)
     }
 

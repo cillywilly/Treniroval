@@ -1,6 +1,8 @@
         package com.example.treniroval.itemAdapter
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +10,18 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.R
+import com.example.treniroval.activitys.CurrentPastTainingActivity
 
-        class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context) :
+        class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context,trainingName : String?, trainingDate:String?) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
     var listItemR = listArrayExercise
     var contextR = context
     var selectedItems:ArrayList<String> = ArrayList()
-
+var trainingName1=trainingName
+var trainingDate1=trainingDate
      inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
         private val exercise2 = view.findViewById<CheckBox>(R.id.exercise2)
-
         init {
             exercise.setOnCheckedChangeListener{
                 _,isChecked ->
@@ -33,10 +36,14 @@ import com.example.treniroval.R
 
         }
 
-        fun bind(listItemExercise: Exercise) {
+        fun bind(listItemExercise: Exercise, context: Context) {
 
             exercise.text = listItemExercise.exercise
             exercise2.text = listItemExercise.exercise2
+            val intent = Intent(context, CurrentPastTainingActivity::class.java)
+            intent.putExtra("trainingName",trainingName1)
+            intent.putExtra("trainingDate",trainingDate1)
+            ContextCompat.startActivity(context, intent, null)
 
             println(exercise.text)
             println(exercise2.text)
@@ -60,7 +67,7 @@ import com.example.treniroval.R
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val listExercise = listItemR[p1]
-        p0.bind(listExercise)
+        p0.bind(listExercise, contextR)
     }
 
 }

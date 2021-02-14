@@ -9,6 +9,7 @@ import android.widget.Button
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterTrainingConstructor
+import kotlinx.android.synthetic.main.activity_current_past_training.*
 import kotlinx.android.synthetic.main.activity_training_constructor.*
 
 
@@ -16,11 +17,14 @@ class TrainingConstructorActivity : Activity() {
 
     private var managerDB = ManagerDB(this)
     private lateinit var selectedItems1: ArrayList<String>
+    var trainingName = intent.getStringExtra("trainingName")
+    var trainingDate  = intent.getStringExtra("trainingDate")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training_constructor)
-
+        trainingNameInTraining.text= trainingName
+        trainingDateInTraining.text= trainingDate
         managerDB.openDb()
         val listItemExercise = managerDB.getExercises()
         managerDB.closeDb()
@@ -28,7 +32,8 @@ class TrainingConstructorActivity : Activity() {
         println(listItemExercise)
         exerciseList.hasFixedSize()
         exerciseList.layoutManager = LinearLayoutManager(this)
-        val r = ItemAdapterTrainingConstructor(listItemExercise, this)
+        val r = ItemAdapterTrainingConstructor(listItemExercise, this,
+            trainingName,trainingDate)
         exerciseList.adapter = r
         selectedItems1 = r.selectedItems
     }
@@ -38,6 +43,8 @@ class TrainingConstructorActivity : Activity() {
         buttonSave.setOnClickListener {
             managerDB.openDb()
             managerDB.setExercisesList(selectedItems1)
+            val intent = Intent(this, NewTrainingActivity::class.java)
+            startActivity(intent)
         }
     }
 

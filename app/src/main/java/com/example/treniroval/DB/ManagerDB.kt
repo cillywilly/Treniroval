@@ -22,8 +22,6 @@ import com.example.treniroval.ListItem.ApproachInExerciseListItem
 import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.ListItem.PastTraining
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class ManagerDB(context: Context) {
     private val DBHelper = DBHelper(context)
@@ -55,10 +53,9 @@ class ManagerDB(context: Context) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertTraining(trainingTopic: String) {
-        val dateTime = LocalDateTime.now()
+    fun insertTraining(trainingTopic: String, date:String) {
         val value = ContentValues().apply {
-            put(DATE, dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
+            put(DATE, date)
             when (trainingTopic) {
                 "Тренировка ног" -> {
                     put(ID_TRAINING_TOPIC, 1)

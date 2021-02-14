@@ -34,12 +34,31 @@
         android:id="@+id/exerciseList"
         android:layout_width="0dp"
         android:layout_height="500dp"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trainingNameInNewTraining"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/trainingNameInNewTraining"
+        android:layout_width="217dp"
+        android:layout_height="24dp"
+        android:gravity="right"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/trainingDateInNewTraining"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trainingNameInNewTraining"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
