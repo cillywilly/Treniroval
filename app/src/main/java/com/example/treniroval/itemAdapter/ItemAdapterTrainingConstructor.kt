@@ -1,8 +1,6 @@
         package com.example.treniroval.itemAdapter
 
 import android.content.Context
-import android.content.Intent
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +8,13 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import com.example.treniroval.ListItem.Exercise
 import com.example.treniroval.R
-import com.example.treniroval.activitys.CurrentPastTainingActivity
 
-        class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context,trainingName : String?, trainingDate:String?) :
+        class ItemAdapterTrainingConstructor(listArrayExercise: ArrayList<Exercise>, context: Context) :
     RecyclerView.Adapter<ItemAdapterTrainingConstructor.ViewHolder>() {
     var listItemR = listArrayExercise
     var contextR = context
     var selectedItems:ArrayList<String> = ArrayList()
-var trainingName1=trainingName
-var trainingDate1=trainingDate
+
      inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
         private val exercise2 = view.findViewById<CheckBox>(R.id.exercise2)
@@ -40,10 +36,9 @@ var trainingDate1=trainingDate
 
             exercise.text = listItemExercise.exercise
             exercise2.text = listItemExercise.exercise2
-            val intent = Intent(context, CurrentPastTainingActivity::class.java)
-            intent.putExtra("trainingName",trainingName1)
-            intent.putExtra("trainingDate",trainingDate1)
-            ContextCompat.startActivity(context, intent, null)
+//            val intent = Intent(context, CurrentPastTainingActivity::class.java)
+//
+//            ContextCompat.startActivity(context, intent, null)
 
             println(exercise.text)
             println(exercise2.text)

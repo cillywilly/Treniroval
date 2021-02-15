@@ -9,22 +9,22 @@ import android.widget.Button
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterTrainingConstructor
-import kotlinx.android.synthetic.main.activity_current_past_training.*
 import kotlinx.android.synthetic.main.activity_training_constructor.*
-
 
 class TrainingConstructorActivity : Activity() {
 
     private var managerDB = ManagerDB(this)
     private lateinit var selectedItems1: ArrayList<String>
-    var trainingName = intent.getStringExtra("trainingName")
-    var trainingDate  = intent.getStringExtra("trainingDate")
+    private lateinit var trainingName:String
+    private lateinit var trainingDate:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        trainingName = intent.getStringExtra("trainingName").toString()
+        trainingDate  = intent.getStringExtra("trainingDate").toString()
         setContentView(R.layout.activity_training_constructor)
-        trainingNameInTraining.text= trainingName
-        trainingDateInTraining.text= trainingDate
+        trainingNameInNewTraining.text= trainingName
+        trainingDateInNewTraining.text= trainingDate
         managerDB.openDb()
         val listItemExercise = managerDB.getExercises()
         managerDB.closeDb()
@@ -32,8 +32,8 @@ class TrainingConstructorActivity : Activity() {
         println(listItemExercise)
         exerciseList.hasFixedSize()
         exerciseList.layoutManager = LinearLayoutManager(this)
-        val r = ItemAdapterTrainingConstructor(listItemExercise, this,
-            trainingName,trainingDate)
+        val r = ItemAdapterTrainingConstructor(listItemExercise, this)
+
         exerciseList.adapter = r
         selectedItems1 = r.selectedItems
     }
@@ -44,6 +44,8 @@ class TrainingConstructorActivity : Activity() {
             managerDB.openDb()
             managerDB.setExercisesList(selectedItems1)
             val intent = Intent(this, NewTrainingActivity::class.java)
+            intent.putExtra("trainingName", trainingName)
+            intent.putExtra("trainingDate", trainingDate)
             startActivity(intent)
         }
     }

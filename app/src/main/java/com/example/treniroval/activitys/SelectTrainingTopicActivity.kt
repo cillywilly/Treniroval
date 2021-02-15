@@ -16,6 +16,7 @@ class SelectTrainingTopicActivity : Activity() {
 
     @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
     val dateTime: LocalDateTime = LocalDateTime.now()
+
     @androidx.annotation.RequiresApi(Build.VERSION_CODES.O)
     val date = dateTime.format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy"))
     private var managerDB = ManagerDB(this)
@@ -31,7 +32,9 @@ class SelectTrainingTopicActivity : Activity() {
         managerDB.openDb()
         managerDB.insertTraining("Тренировка груди", date)
         managerDB.closeDb()
-         intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent.putExtra("trainingName", "Тренировка груди")
+        intent.putExtra("trainingDate", date)
         startActivity(intent)
     }
 
@@ -40,7 +43,9 @@ class SelectTrainingTopicActivity : Activity() {
         managerDB.openDb()
         managerDB.insertTraining("Тренировка ног", date)
         managerDB.closeDb()
-         intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent.putExtra("trainingName", "Тренировка ног")
+        intent.putExtra("trainingDate", date)
         startActivity(intent)
     }
 
@@ -49,7 +54,9 @@ class SelectTrainingTopicActivity : Activity() {
         managerDB.openDb()
         managerDB.insertTraining("Тренировка спины", date)
         managerDB.closeDb()
-         intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent = Intent(this, TrainingConstructorActivity::class.java)
+        intent.putExtra("trainingName", "Тренировка спины")
+        intent.putExtra("trainingDate", date)
         startActivity(intent)
     }
 
