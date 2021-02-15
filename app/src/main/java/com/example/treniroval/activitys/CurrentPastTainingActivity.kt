@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.activity_current_past_training.*
 
 class CurrentPastTainingActivity : Activity() {
     private var managerDB = ManagerDB(this)
-//    private val tnt = findViewById<TextView>(R.id.trainingNameInTraining)
-//    private val tdt = findViewById<TextView>(R.id.trainingDateInTraining)
 
     @SuppressLint("Recycle")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -27,8 +25,6 @@ class CurrentPastTainingActivity : Activity() {
         setContentView(R.layout.activity_current_past_training)
         trainingNameInTraining.text= intent.getStringExtra("trainingName")
         trainingDateInTraining.text= intent.getStringExtra("trainingDate")
-//        tnt.text = intent.getStringExtra("trainingName")
-//        tdt.text = intent.getStringExtra("trainingDate")
 
         managerDB.openDb()
 

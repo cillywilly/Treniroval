@@ -6,17 +6,8 @@
     android:layout_height="40dp"
     android:layout_weight="1"
     android:orientation="horizontal"
-    tools:context=".ItemLayout.item_layout_exercise"
     tools:ignore="MissingDefaultResource">
-
-        <!--    <LinearLayout-->
-        <!--        android:id="@+id/approachLinearLayout"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="40dp"-->
-        <!--        android:orientation="horizontal"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toTopOf="parent">-->
+<!--    tools:context=".ItemLayout.item_layout_exercise"-->
 
         <TextView
             android:id="@+id/exerciseNameInPastTrainings"
@@ -30,6 +21,5 @@
             android:layout_height="match_parent">
 
         </ListView>
-        <!--    </LinearLayout>-->
 
 </LinearLayout>

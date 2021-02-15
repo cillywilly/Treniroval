@@ -21,13 +21,13 @@ class ItemAdapterNewTraining(
     var contextR = context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInPastTrainings)
-        private val approach = view.findViewById<ListView>(R.id.approachesListView)
-        private val linearLayout = view.findViewById<LinearLayout>(R.id.approachLinearLayout)
+        private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTrain)
+        private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTrain)
+        private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
 
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
-            val adapter = ItemAdapterApproachInExercise(
+            val adapter = ItemAdapterApproachInNewTraining(
                 listItemExerciseInTable.approachInExerciseListItem,
                 context
             )
@@ -51,7 +51,7 @@ class ItemAdapterNewTraining(
         val inflater = LayoutInflater.from(contextR)
         return ViewHolder(
             inflater.inflate(
-                R.layout.item_exercise_in_table,
+                R.layout.item_exercise_in_new_training,
                 p0,
                 false
             )

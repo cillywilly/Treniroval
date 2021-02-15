@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutNewTrain"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_weight="1">
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    tools:context=".ItemLayout.item_layout_exercise_new_training"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/exerciseNameInNewTrain"
         android:layout_width="85dp"
         android:layout_height="match_parent"
-        android:text="@string/Exercise"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/Exercise" />
 
     <ListView
-        android:id="@+id/approachesListView"
+        android:id="@+id/approachesInNewTraining"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 </LinearLayout>

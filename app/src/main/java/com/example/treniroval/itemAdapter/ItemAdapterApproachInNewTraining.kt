@@ -10,16 +10,14 @@ import android.widget.TextView
 import com.example.treniroval.ListItem.ApproachInExerciseListItem
 import com.example.treniroval.R
 
-class ItemAdapterApproachInExercise(
+class ItemAdapterApproachInNewTraining(
     private val approachInExerciseListItem: ArrayList<ApproachInExerciseListItem>,
     context: Context
-//):  BaseAdapter() {
 ) : ArrayAdapter<ApproachInExerciseListItem>(
     context,
-    R.layout.item_aproach_in_exercise,
+    R.layout.item_approach_in_new_exercise,
     approachInExerciseListItem
 ) {
-
     private val inflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -38,7 +36,7 @@ class ItemAdapterApproachInExercise(
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val rowView = inflater.inflate(R.layout.item_aproach_in_exercise, parent, false)
+        val rowView = inflater.inflate(R.layout.item_approach_in_new_exercise, parent, false)
         val podhod: TextView = rowView.findViewById(R.id.approachInExercise)
         val povtoreniya = rowView.findViewById<TextView>(R.id.repeatInExercise)
         val kg = rowView.findViewById<TextView>(R.id.worckloadInExercise)
@@ -48,5 +46,4 @@ class ItemAdapterApproachInExercise(
         kg.text = approachInExerciseListItem[position].load
         return rowView
     }
-
 }
