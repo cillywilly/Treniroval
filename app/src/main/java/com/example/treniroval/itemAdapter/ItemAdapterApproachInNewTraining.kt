@@ -34,7 +34,7 @@ class ItemAdapterApproachInNewTraining(
         return position.toLong()
     }
 
-    @SuppressLint("ViewHolder")
+    @SuppressLint("ViewHolder", "WrongConstant")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.item_approach_in_new_exercise, parent, false)
         val podhod: TextView = rowView.findViewById(R.id.approachInExercise)

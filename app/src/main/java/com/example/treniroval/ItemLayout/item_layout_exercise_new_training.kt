@@ -9,4 +9,8 @@ class item_layout_exercise_new_training : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_approach_in_new_exercise)
     }
+
+
+
+
 }

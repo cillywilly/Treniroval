@@ -1,51 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/approachInExercise"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="podhod"
-        app:layout_constraintEnd_toStartOf="@+id/repeatInExercise"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="1"
+        android:text="podhod" />
+
 
     <TextView
         android:id="@+id/repeatInExercise"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="povrtoreniya"
-        app:layout_constraintEnd_toStartOf="@+id/worckloadInExercise"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="1"
+        android:text="povrtoreniya" />
 
     <TextView
         android:id="@+id/worckloadInExercise"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:text="kg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="onClickAddApproach"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/worckloadInExercise"
-        app:srcCompat="@android:drawable/ic_input_add"
-        tools:ignore="MissingConstraints" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_weight="1"
+        android:text="kg" />
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/addApproachButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginRight="16dp"-->
+    <!--        android:onClick="onClickAddApproach"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/worckloadInExercise"-->
+    <!--        app:srcCompat="@android:drawable/ic_input_add"-->
+    <!--        tools:visibility="visible" />-->
+</LinearLayout>

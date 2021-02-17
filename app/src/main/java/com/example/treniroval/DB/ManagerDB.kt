@@ -32,7 +32,7 @@ class ManagerDB(context: Context) {
     fun getLastTrainingID(): String? {
         val cursor = db.query(
             TABLE_TRAINING,
-            null, null, null, null, null, null
+            null, null, null, null, null, ID_TRAINING
         )
         cursor.moveToLast()
         var s = "0"

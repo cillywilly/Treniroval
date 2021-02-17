@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.TrainingComplitedActivity">
+    tools:context=".activitys.NewTrainingActivity">
 
     <Button
         android:id="@+id/buttonBack"
@@ -18,17 +18,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/newTrainingList"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trainingNameInNewTraining" />
-
+        app:layout_constraintTop_toBottomOf="@+id/trainingNameInNewTraining"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/trainingNameInNewTraining"

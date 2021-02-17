@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
 
@@ -21,9 +18,10 @@ class ItemAdapterNewTraining(
     var contextR = context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTrain)
-        private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTrain)
+        private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
+        private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTraining)
         private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
+        private val addApproach = view.findViewById<ImageButton>(R.id.addApproachButton)
 
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
