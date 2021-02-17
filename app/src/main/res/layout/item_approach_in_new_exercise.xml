@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="1"
+        android:layout_weight="10"
         android:text="podhod" />
 
 
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="1"
+        android:layout_weight="10"
         android:text="povrtoreniya" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="1dp"
-        android:layout_weight="1"
+        android:layout_weight="10"
         android:text="kg" />
     <!--    <ImageButton-->
     <!--        android:id="@+id/addApproachButton"-->
