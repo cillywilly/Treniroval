@@ -27,7 +27,7 @@ class NewTrainingActivity : Activity() {
         trainingDateInNewTraining.text = trainingDate
 
         managerDB.openDb()
-        val newTrainingID = managerDB.getLastTrainingID() as String
+        val newTrainingID = managerDB.getLastTrainingID()
         val listItems = managerDB.getCurrentTraining(newTrainingID)
 
         newTrainingList.hasFixedSize()
@@ -42,7 +42,9 @@ class NewTrainingActivity : Activity() {
     }
 
     fun onClickAddApproach(view: View) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        managerDB.addApproach("1","2")
+        val listItems = managerDB.getCurrentTraining(managerDB.getLastTrainingID())
+        newTrainingList.adapter = ItemAdapterNewTraining(listItems, this)
+
     }
 }

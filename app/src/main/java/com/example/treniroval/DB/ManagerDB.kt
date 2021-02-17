@@ -29,15 +29,13 @@ class ManagerDB(context: Context) {
 
 
     @SuppressLint("Recycle")
-    fun getLastTrainingID(): String? {
+    fun getLastTrainingID(): String {
         val cursor = db.query(
             TABLE_TRAINING,
             null, null, null, null, null, ID_TRAINING
         )
         cursor.moveToLast()
-        var s = "0"
-        s = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
-        return s
+        return cursor.getString(cursor.getColumnIndex(ID_TRAINING))
     }
 
     fun openDb() {
@@ -193,5 +191,18 @@ class ManagerDB(context: Context) {
         )
         cursor.moveToFirst()
         return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
+    }
+
+    fun addApproach(exerciseId: String, approachNum:String) {
+        addApproach(getLastTrainingID(),exerciseId,approachNum)
+    }
+
+    fun addApproach(trainingId: String,exerciseId: String, approachNum:String) {
+        db.execSQL(
+            "INSERT INTO ${Companion.TABLE_TRAINING_EXERCISE} " +
+                    "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
+                    "VALUES('$trainingId', '$exerciseId', '$approachNum', " +
+                    "'0', " +
+                    "'0');")
     }
 }
