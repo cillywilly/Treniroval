@@ -14,6 +14,7 @@ import com.example.treniroval.DB.DBHelper.Companion.ID_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_TOPIC
+import com.example.treniroval.DB.DBHelper.Companion.NUMBER_EXERCISES
 import com.example.treniroval.DB.DBHelper.Companion.REPEAT
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
@@ -65,6 +66,7 @@ class ManagerDB(context: Context) {
                     put(ID_TRAINING_TOPIC, 3)
                 }
             }
+            put(NUMBER_EXERCISES, 0)
         }
         println(value)
 
@@ -85,7 +87,8 @@ class ManagerDB(context: Context) {
             cursor1?.moveToFirst()!!
             val trainingTopic = cursor1.getString(cursor1.getColumnIndex(TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(DATE))
-            listItems.add(PastTraining(trainingTopic, date))
+            val numberExercises = cursor.getInt(cursor.getColumnIndex(NUMBER_EXERCISES))
+            listItems.add(PastTraining(trainingTopic, date, numberExercises))
         }
         return listItems
     }
@@ -119,9 +122,9 @@ class ManagerDB(context: Context) {
             null, null, null, ID_TRAINING_EXERCISE
         )
         exerciseCursor.moveToLast()
-        val exercises: Int =
+        val exercisesCount: Int =
             exerciseCursor.getInt(exerciseCursor.getColumnIndex(ID_EXERCISE))
-        for (i in 1..exercises) {
+        for (i in 1..exercisesCount) {
             approachListItems.clear()
             val cursor = db.query(
                 Companion.TABLE_TRAINING_EXERCISE, null,

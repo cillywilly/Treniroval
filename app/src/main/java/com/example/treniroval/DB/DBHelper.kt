@@ -23,6 +23,7 @@ class DBHelper(context: Context?) :
                     "($ID_TRAINING INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$ID_TRAINING_TOPIC INTEGER NOT NULL, " +
                     "$DATE TEXT NOT NULL, " +
+                    "$NUMBER_EXERCISES INTEGER NOT NULL," +
                     "FOREIGN KEY ($ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($ID_TRAINING_TOPIC)) ;")
         val SQL_CREATE_TABLE_TRAINING_EXERCISE =
             ("CREATE TABLE $TABLE_TRAINING_EXERCISE" +
@@ -87,6 +88,7 @@ class DBHelper(context: Context?) :
         const val ID_TRAINING_TOPIC: String =
             "id_training_topic" //ИД используется 2 раза это -(1)-
         const val DATE: String = "date" //дата тренировки
+        const val NUMBER_EXERCISES: String = "number_exercises" //дата тренировки
 
         const val TABLE_TRAINING_TOPIC: String = "training_topic"  //таблица названий тренировок
         const val TRAINING_TOPIC: String = "training_topic" //название тренировки + -(2)-

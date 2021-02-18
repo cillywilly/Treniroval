@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.treniroval.DB.ManagerDB
+import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterNewTraining
 import kotlinx.android.synthetic.main.activity_new_training.*
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_training_constructor.trainingName
 class NewTrainingActivity : Activity() {
 
     private var managerDB = ManagerDB(this)
+    private lateinit var newTrainingID:String
+    private lateinit var listItems :ArrayList<ExerciseInTable>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +30,8 @@ class NewTrainingActivity : Activity() {
         trainingDateInNewTraining.text = trainingDate
 
         managerDB.openDb()
-        val newTrainingID = managerDB.getLastTrainingID()
-        val listItems = managerDB.getCurrentTraining(newTrainingID)
+        newTrainingID = managerDB.getLastTrainingID()
+        listItems = managerDB.getCurrentTraining(newTrainingID)
 
         newTrainingList.hasFixedSize()
         newTrainingList.layoutManager = LinearLayoutManager(this)
@@ -42,9 +45,8 @@ class NewTrainingActivity : Activity() {
     }
 
     fun onClickAddApproach(view: View) {
-        managerDB.addApproach("1","2")
-        val listItems = managerDB.getCurrentTraining(managerDB.getLastTrainingID())
+        managerDB.addApproach("3","2")
+        listItems = managerDB.getCurrentTraining(newTrainingID)
         newTrainingList.adapter = ItemAdapterNewTraining(listItems, this)
-
     }
 }
