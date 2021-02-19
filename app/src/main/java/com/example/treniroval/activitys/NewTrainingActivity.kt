@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_training_constructor.trainingName
 class NewTrainingActivity : Activity() {
 
     private var managerDB = ManagerDB(this)
-    private lateinit var newTrainingID:String
+    private var newTrainingID =1
     private lateinit var listItems :ArrayList<ExerciseInTable>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,13 +30,13 @@ class NewTrainingActivity : Activity() {
         trainingDateInNewTraining.text = trainingDate
 
         managerDB.openDb()
-        newTrainingID = managerDB.getLastTrainingID()
+        newTrainingID = managerDB.getNewTrainingID()
         listItems = managerDB.getCurrentTraining(newTrainingID)
 
         newTrainingList.hasFixedSize()
         newTrainingList.layoutManager = LinearLayoutManager(this)
 
-        newTrainingList.adapter = ItemAdapterNewTraining(listItems, this)
+        newTrainingList.adapter = ItemAdapterNewTraining(listItems, this, managerDB)
     }
 
     fun onClickBack(view: View) {
@@ -44,9 +44,9 @@ class NewTrainingActivity : Activity() {
         startActivity(intent)
     }
 
-    fun onClickAddApproach(view: View) {
-        managerDB.addApproach("3","2")
-        listItems = managerDB.getCurrentTraining(newTrainingID)
-        newTrainingList.adapter = ItemAdapterNewTraining(listItems, this)
-    }
+//    fun onClickAddApproach(view: View) {
+//        managerDB.addApproach("3","2")
+//        listItems = managerDB.getCurrentTraining(newTrainingID)
+//        newTrainingList.adapter = ItemAdapterNewTraining(listItems, this, managerDB)
+//    }
 }

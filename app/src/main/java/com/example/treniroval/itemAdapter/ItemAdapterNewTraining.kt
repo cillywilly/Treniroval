@@ -7,17 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
+import kotlinx.android.synthetic.main.item_exercise_in_new_training.view.*
 
 class ItemAdapterNewTraining(
     listItemExerciseInTable: ArrayList<ExerciseInTable>,
-    context: Context
+    context: Context, val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
     var listItemR = listItemExerciseInTable
     var contextR = context
+    var exerciseNumber:Int = 0
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+//    fun onClickAddApproach() {
+//        managerDB.addApproach("3","2")
+//    }
+
+    inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTraining)
         private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
@@ -31,17 +38,14 @@ class ItemAdapterNewTraining(
             )
             approach.adapter = adapter
 
-//            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
-
-//            linearLayout.orientation = LinearLayout.HORIZONTAL
             val i = listItemExerciseInTable.approachInExerciseListItem.size
-//            linearLayout.setHeight //= 40*i
             linearLayout.layoutParams =
                 ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 100 * i)
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
@@ -62,6 +66,18 @@ class ItemAdapterNewTraining(
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val listItem = listItemR[p1]
+        p0.view.addApproachButton.setOnClickListener{
+            managerDB.addApproach(p0.adapterPosition+1,"1")
+            managerDB.closeDb()
+            managerDB.openDb()
+            updateAdapter(managerDB.getCurrentTraining(managerDB.getNewTrainingID()))
+        }
         p0.bind(listItem, contextR)
+    }
+
+    private fun updateAdapter(list: ArrayList<ExerciseInTable>) {
+        listItemR.clear()
+        listItemR.addAll(list)
+        notifyDataSetChanged()
     }
 }

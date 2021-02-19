@@ -28,7 +28,7 @@ class CurrentPastTainingActivity : Activity() {
 
         managerDB.openDb()
 
-        val listItems = managerDB.getCurrentTraining("1")
+        val listItems = managerDB.getCurrentTraining(managerDB.getNewTrainingID())
         val s: Cursor? =
             managerDB.db.rawQuery("select * from ${DBHelper.TABLE_TRAINING_EXERCISE}", null)
         if (s != null) {

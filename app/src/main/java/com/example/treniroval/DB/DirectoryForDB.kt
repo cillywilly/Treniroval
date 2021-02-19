@@ -24,7 +24,7 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
         val approachInExercise = ApproachInExerciseListItem(app, rep, loa)
         approachListItems.add(approachInExercise)
     }
-    val exercise = ExerciseInTable("Приседания со штангой", approachListItems)
+    val exercise = ExerciseInTable("Приседания со штангой", approachListItems,null)
     exerciseTraining.add(exercise)
 
     for (appproach in exerciseTraining) {

@@ -18,6 +18,7 @@ import com.example.treniroval.R
      inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val exercise = view.findViewById<CheckBox>(R.id.exercise)
         private val exercise2 = view.findViewById<CheckBox>(R.id.exercise2)
+
         init {
             exercise.setOnCheckedChangeListener{
                 _,isChecked ->
@@ -29,7 +30,6 @@ import com.example.treniroval.R
                 if (isChecked) selectedItems.add(exercise2.text as String)
                 if (!isChecked) selectedItems.remove(exercise2.text as String)
             }
-
         }
 
         fun bind(listItemExercise: Exercise, context: Context) {

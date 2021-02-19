@@ -17,6 +17,8 @@ import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.NUMBER_EXERCISES
 import com.example.treniroval.DB.DBHelper.Companion.REPEAT
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_EXERCISE
+import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
 import com.example.treniroval.ListItem.ApproachInExerciseListItem
@@ -30,13 +32,13 @@ class ManagerDB(context: Context) {
 
 
     @SuppressLint("Recycle")
-    fun getLastTrainingID(): String {
+    fun getNewTrainingID(): Int {
         val cursor = db.query(
             TABLE_TRAINING,
             null, null, null, null, null, ID_TRAINING
         )
         cursor.moveToLast()
-        return cursor.getString(cursor.getColumnIndex(ID_TRAINING))
+        return cursor.getInt(cursor.getColumnIndex(ID_TRAINING))
     }
 
     fun openDb() {
@@ -52,7 +54,7 @@ class ManagerDB(context: Context) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertTraining(trainingTopic: String, date:String) {
+    fun insertTraining(trainingTopic: String, date: String) {
         val value = ContentValues().apply {
             put(DATE, date)
             when (trainingTopic) {
@@ -66,31 +68,30 @@ class ManagerDB(context: Context) {
                     put(ID_TRAINING_TOPIC, 3)
                 }
             }
-            put(NUMBER_EXERCISES, 0)
+            put(NUMBER_EXERCISES, 1)
         }
         println(value)
-
         db.insert(TABLE_TRAINING, null, value)
     }
 
     @SuppressLint("Recycle")
     fun getPastTrainings(): ArrayList<PastTraining> {
-        val listItems = ArrayList<PastTraining>()
+        val trainingList = ArrayList<PastTraining>()
         val cursor =
-            db.query(Companion.TABLE_TRAINING, null, null, null, null, null, ID_TRAINING)
+            db.query(Companion.TABLE_TRAINING, null, null, null, null, null, null)
         while (cursor?.moveToNext()!!) {
-            val trainingTopicID = cursor.getString(cursor.getColumnIndex(ID_TRAINING_TOPIC))
+            val trainingTopicID = cursor.getInt(cursor.getColumnIndex(ID_TRAINING_TOPIC))
             val cursor1 = db.query(
-                Companion.TABLE_TRAINING_TOPIC,
+                TABLE_TRAINING_TOPIC,
                 null, "$ID_TRAINING_TOPIC = $trainingTopicID", null, null, null, null
             )
             cursor1?.moveToFirst()!!
             val trainingTopic = cursor1.getString(cursor1.getColumnIndex(TRAINING_TOPIC))
             val date = cursor.getString(cursor.getColumnIndex(DATE))
             val numberExercises = cursor.getInt(cursor.getColumnIndex(NUMBER_EXERCISES))
-            listItems.add(PastTraining(trainingTopic, date, numberExercises))
+            trainingList.add(PastTraining(trainingTopic, date, numberExercises))
         }
-        return listItems
+        return trainingList
     }
 
     @SuppressLint("Recycle")
@@ -111,19 +112,28 @@ class ManagerDB(context: Context) {
 
     @SuppressLint("Recycle")
     fun getCurrentTraining(
-        trainingId: String,
+        trainingId: Int,
     ): ArrayList<ExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ExerciseInTable>()
         val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
         var exerciseName = "BEZ NAZVANIYA"
         val exerciseCursor = db.query(
-            Companion.TABLE_TRAINING_EXERCISE, null,
-            "$ID_TRAINING='$trainingId'",
-            null, null, null, ID_TRAINING_EXERCISE
+            Companion.TABLE_TRAINING, null,
+            "$ID_TRAINING=$trainingId",
+            null, null, null, null
         )
-        exerciseCursor.moveToLast()
+        exerciseCursor.moveToFirst()
         val exercisesCount: Int =
-            exerciseCursor.getInt(exerciseCursor.getColumnIndex(ID_EXERCISE))
+            exerciseCursor.getInt(exerciseCursor.getColumnIndex(NUMBER_EXERCISES))
+//        val exerciseCursor = db.query(
+//            Companion.TABLE_TRAINING_EXERCISE, null,
+//            "$ID_TRAINING='$trainingId'",
+//            null, null, null, ID_TRAINING_EXERCISE
+//        )
+//        exerciseCursor.moveToLast()
+//        val exercisesCount: Int =
+//            exerciseCursor.getInt(exerciseCursor.getColumnIndex(ID_EXERCISE))
+
         for (i in 1..exercisesCount) {
             approachListItems.clear()
             val cursor = db.query(
@@ -147,28 +157,29 @@ class ManagerDB(context: Context) {
                 )
             }
             listItemExerciseInTable.add(
-                ExerciseInTable(exerciseName, approachListItems)
+                ExerciseInTable(exerciseName, approachListItems, null)
             )
         }
         return listItemExerciseInTable
     }
 
     fun setExercisesList(exercisesNames: ArrayList<String>) {
-        val lastTrainigid = getLastTrainingID()
+        val lastTrainigid = getNewTrainingID()
 //        val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
 //        val exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
 //
 //        val approachInExercise = ApproachInExerciseListItem("1", "0", "0")
 //        approachListItems.add(approachInExercise)
+        db.execSQL("update $TABLE_TRAINING set $NUMBER_EXERCISES=${exercisesNames.size} where $ID_TRAINING =$lastTrainigid")
         var count = 1
         for (exerciseName in exercisesNames) {
 //            val exercise = ExerciseInTable(exerciseName, approachListItems)
 //            exerciseTraining.add(exercise)
 
             db.execSQL(
-                "INSERT INTO ${Companion.TABLE_TRAINING_EXERCISE}" +
+                "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
-                        "VALUES(${lastTrainigid}, $count,'1', '0', '0');"
+                        "VALUES($lastTrainigid, $count,'1', '0', '0');"
             )
             count++
         }
@@ -196,16 +207,17 @@ class ManagerDB(context: Context) {
         return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
     }
 
-    fun addApproach(exerciseId: String, approachNum:String) {
-        addApproach(getLastTrainingID(),exerciseId,approachNum)
+    fun addApproach(exerciseId: Int, approachNum: String) {
+        addApproach(getNewTrainingID(), exerciseId, approachNum)
     }
 
-    fun addApproach(trainingId: String,exerciseId: String, approachNum:String) {
+    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: String) {
         db.execSQL(
             "INSERT INTO ${Companion.TABLE_TRAINING_EXERCISE} " +
                     "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
                     "VALUES('$trainingId', '$exerciseId', '$approachNum', " +
                     "'0', " +
-                    "'0');")
+                    "'0');"
+        )
     }
 }
