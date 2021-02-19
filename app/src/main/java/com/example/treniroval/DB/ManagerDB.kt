@@ -203,15 +203,15 @@ class ManagerDB(context: Context) {
             Companion.TABLE_EXERCISE, null, "$ID_EXERCISE='$exerciseId'",
             null, null, null, null
         )
-        cursor.moveToFirst()
+        cursor.moveToLast()
         return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
     }
 
-    fun addApproach(exerciseId: Int, approachNum: String) {
+    fun addApproach(exerciseId: Int, approachNum: Int) {
         addApproach(getNewTrainingID(), exerciseId, approachNum)
     }
 
-    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: String) {
+    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int) {
         db.execSQL(
             "INSERT INTO ${Companion.TABLE_TRAINING_EXERCISE} " +
                     "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +

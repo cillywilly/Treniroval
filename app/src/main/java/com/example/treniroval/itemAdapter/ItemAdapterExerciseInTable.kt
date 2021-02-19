@@ -34,11 +34,7 @@ class ItemAdapterExerciseInTable(
             )
             approach.adapter = adapter
 
-//            ItemAdapterApproachInExercise(listItemExerciseInTable.listItemApproachInExercise,context)
-
-//            linearLayout.orientation = LinearLayout.HORIZONTAL
             val i = listItemExerciseInTable.approachInExerciseListItem.size
-//            linearLayout.setHeight //= 40*i
             linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
 
             itemView.setOnClickListener {
@@ -49,7 +45,7 @@ class ItemAdapterExerciseInTable(
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val inflater = LayoutInflater.from(contextR)
-        return ItemAdapterExerciseInTable.ViewHolder(
+        return ViewHolder(
             inflater.inflate(
                 R.layout.item_exercise_in_table,
                 p0,

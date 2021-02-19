@@ -21,7 +21,6 @@ class ItemAdapterApproachInNewTraining(
     private val inflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-
     override fun getCount(): Int {
         return approachInExerciseListItem.size
     }

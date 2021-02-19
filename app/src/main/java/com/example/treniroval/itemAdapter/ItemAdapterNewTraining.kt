@@ -14,15 +14,11 @@ import kotlinx.android.synthetic.main.item_exercise_in_new_training.view.*
 
 class ItemAdapterNewTraining(
     listItemExerciseInTable: ArrayList<ExerciseInTable>,
-    context: Context, val managerDB: ManagerDB
+    context: Context, private val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
     var listItemR = listItemExerciseInTable
     var contextR = context
-    var exerciseNumber:Int = 0
-
-//    fun onClickAddApproach() {
-//        managerDB.addApproach("3","2")
-//    }
+    lateinit var newListItem: ArrayList<ExerciseInTable>
 
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
@@ -31,6 +27,7 @@ class ItemAdapterNewTraining(
         private val addApproach = view.findViewById<ImageButton>(R.id.addApproachButton)
 
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
+
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInNewTraining(
                 listItemExerciseInTable.approachInExerciseListItem,
@@ -66,13 +63,17 @@ class ItemAdapterNewTraining(
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val listItem = listItemR[p1]
-        p0.view.addApproachButton.setOnClickListener{
-            managerDB.addApproach(p0.adapterPosition+1,"1")
+        p0.view.addApproachButton.setOnClickListener {
+            managerDB.addApproach(p0.adapterPosition + 1, getApproachNum(p0.adapterPosition)+1)
             managerDB.closeDb()
             managerDB.openDb()
             updateAdapter(managerDB.getCurrentTraining(managerDB.getNewTrainingID()))
         }
         p0.bind(listItem, contextR)
+    }
+
+    private fun getApproachNum(positoin: Int): Int {
+        return listItemR.get(positoin).approachInExerciseListItem.size
     }
 
     private fun updateAdapter(list: ArrayList<ExerciseInTable>) {
