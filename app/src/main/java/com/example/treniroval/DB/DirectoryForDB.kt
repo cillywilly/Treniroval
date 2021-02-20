@@ -9,26 +9,26 @@ import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.TABLE_TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.TRAINING_TOPIC
 import com.example.treniroval.DB.DBHelper.Companion.WORKLOAD
-import com.example.treniroval.ListItem.ApproachInExerciseListItem
+import com.example.treniroval.ListItem.ApproachInExercise
 import com.example.treniroval.ListItem.ExerciseInTable
 
 
 fun addApproach(sqLiteDatabase: SQLiteDatabase) {
-    val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
+    val approaches: ArrayList<ApproachInExercise> = ArrayList()
     val exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
 
     for (i in 1..4) {
         val app: String = i.toString()
         val rep: String = (8..12).random().toString()
         val loa: String = (40..70).random().toString()
-        val approachInExercise = ApproachInExerciseListItem(app, rep, loa)
-        approachListItems.add(approachInExercise)
+        val approachInExercise = ApproachInExercise(app, rep, loa, i)
+        approaches.add(approachInExercise)
     }
-    val exercise = ExerciseInTable("Приседания со штангой", approachListItems,null)
+    val exercise = ExerciseInTable("Приседания со штангой", approaches)
     exerciseTraining.add(exercise)
 
     for (appproach in exerciseTraining) {
-        for (approach in appproach.approachInExerciseListItem) {
+        for (approach in appproach.listApproachesInExercise) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +
@@ -38,7 +38,7 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
             )
         }}
     for (appproach in exerciseTraining) {
-        for (approach in appproach.approachInExerciseListItem) {
+        for (approach in appproach.listApproachesInExercise) {
             sqLiteDatabase.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
                         "(${DBHelper.ID_TRAINING}, ${DBHelper.ID_EXERCISE},$APPROACH,$REPEAT,$WORKLOAD) " +

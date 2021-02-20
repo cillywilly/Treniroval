@@ -7,26 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.treniroval.ListItem.ApproachInExerciseListItem
+import com.example.treniroval.ListItem.ApproachInExercise
 import com.example.treniroval.R
 
 class ItemAdapterApproachInNewTraining(
-    private val approachInExerciseListItem: ArrayList<ApproachInExerciseListItem>,
+    private val approachInExercise: ArrayList<ApproachInExercise>,
     context: Context
-) : ArrayAdapter<ApproachInExerciseListItem>(
+) : ArrayAdapter<ApproachInExercise>(
     context,
     R.layout.item_approach_in_new_exercise,
-    approachInExerciseListItem
+    approachInExercise
 ) {
     private val inflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
-        return approachInExerciseListItem.size
+        return approachInExercise.size
     }
 
-    override fun getItem(position: Int): ApproachInExerciseListItem {
-        return approachInExerciseListItem[position]
+    override fun getItem(position: Int): ApproachInExercise {
+        return approachInExercise[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -40,9 +40,9 @@ class ItemAdapterApproachInNewTraining(
         val povtoreniya = rowView.findViewById<TextView>(R.id.repeatInExercise)
         val kg = rowView.findViewById<TextView>(R.id.worckloadInExercise)
 
-        podhod.text = approachInExerciseListItem[position].approachNumber
-        povtoreniya.text = approachInExerciseListItem[position].repeatSum
-        kg.text = approachInExerciseListItem[position].load
+        podhod.text = approachInExercise[position].approachNumber
+        povtoreniya.text = approachInExercise[position].repeatSum
+        kg.text = approachInExercise[position].load
         return rowView
     }
 }

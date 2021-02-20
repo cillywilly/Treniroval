@@ -13,11 +13,9 @@ import com.example.treniroval.R
 import kotlinx.android.synthetic.main.item_exercise_in_new_training.view.*
 
 class ItemAdapterNewTraining(
-    listItemExerciseInTable: ArrayList<ExerciseInTable>,
-    context: Context, private val managerDB: ManagerDB
+    var listExercisesInTable: ArrayList<ExerciseInTable>,
+    var context: Context, private val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
-    var listItemR = listItemExerciseInTable
-    var contextR = context
     lateinit var newListItem: ArrayList<ExerciseInTable>
 
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
@@ -30,24 +28,23 @@ class ItemAdapterNewTraining(
 
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInNewTraining(
-                listItemExerciseInTable.approachInExerciseListItem,
+                listItemExerciseInTable.listApproachesInExercise,
                 context
             )
             approach.adapter = adapter
 
-            val i = listItemExerciseInTable.approachInExerciseListItem.size
+            val i = listItemExerciseInTable.listApproachesInExercise.size
             linearLayout.layoutParams =
                 ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 100 * i)
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val inflater = LayoutInflater.from(contextR)
+        val inflater = LayoutInflater.from(context)
         return ViewHolder(
             inflater.inflate(
                 R.layout.item_exercise_in_new_training,
@@ -58,27 +55,35 @@ class ItemAdapterNewTraining(
     }
 
     override fun getItemCount(): Int {
-        return listItemR.size
+        return listExercisesInTable.size
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        val listItem = listItemR[p1]
+        val listItem = listExercisesInTable[p1]
         p0.view.addApproachButton.setOnClickListener {
-            managerDB.addApproach(p0.adapterPosition + 1, getApproachNum(p0.adapterPosition)+1)
             managerDB.closeDb()
             managerDB.openDb()
-            updateAdapter(managerDB.getCurrentTraining(managerDB.getNewTrainingID()))
+            managerDB.addApproach(p0.adapterPosition + 1, managerDB.getApproachNum(managerDB.getNewTrainingID(),p0.adapterPosition+1))
+            managerDB.closeDb()
+            managerDB.openDb()
+            updateAdapter(
+                managerDB.getCurrentTraining(managerDB.getNewTrainingID()),
+                p0.adapterPosition
+            )
         }
-        p0.bind(listItem, contextR)
+        p0.bind(listItem, context)
     }
 
     private fun getApproachNum(positoin: Int): Int {
-        return listItemR.get(positoin).approachInExerciseListItem.size
+        val size =listExercisesInTable[positoin].listApproachesInExercise.size
+        return size+1
     }
 
-    private fun updateAdapter(list: ArrayList<ExerciseInTable>) {
-        listItemR.clear()
-        listItemR.addAll(list)
-        notifyDataSetChanged()
+    private fun updateAdapter(list: ArrayList<ExerciseInTable>, adapterPosition: Int) {
+        listExercisesInTable.clear()
+        listExercisesInTable.addAll(list)
+//        notifyItemInserted(adapterPosition)
+        notifyItemChanged(adapterPosition)
+//        notifyDataSetChanged()
     }
 }

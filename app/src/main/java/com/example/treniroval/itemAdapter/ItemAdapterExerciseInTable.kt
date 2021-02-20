@@ -29,12 +29,12 @@ class ItemAdapterExerciseInTable(
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInExercise(
-                listItemExerciseInTable.approachInExerciseListItem,
+                listItemExerciseInTable.listApproachesInExercise,
                 context
             )
             approach.adapter = adapter
 
-            val i = listItemExerciseInTable.approachInExerciseListItem.size
+            val i = listItemExerciseInTable.listApproachesInExercise.size
             linearLayout.layoutParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,100 * i)
 
             itemView.setOnClickListener {

@@ -3,13 +3,11 @@ package com.example.treniroval.activitys
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.example.treniroval.DB.DBHelper
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterExerciseInTable
@@ -23,24 +21,12 @@ class CurrentPastTainingActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_current_past_training)
-        trainingNameInTraining.text= intent.getStringExtra("trainingName")
-        trainingDateInTraining.text= intent.getStringExtra("trainingDate")
+        trainingNameInTraining.text = intent.getStringExtra("trainingName")
+        trainingDateInTraining.text = intent.getStringExtra("trainingDate")
 
         managerDB.openDb()
 
         val listItems = managerDB.getCurrentTraining(managerDB.getNewTrainingID())
-        val s: Cursor? =
-            managerDB.db.rawQuery("select * from ${DBHelper.TABLE_TRAINING_EXERCISE}", null)
-        if (s != null) {
-            s.moveToFirst()
-            println(s.getString(0))
-            println(s.getString(1))
-        }
-
-
-        for (exercise in listItems) {
-            println("YPRAGNENIE : " + exercise)
-        }
 
         currentPastTrainingList.hasFixedSize()
         currentPastTrainingList.layoutManager = LinearLayoutManager(this)

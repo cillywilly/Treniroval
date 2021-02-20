@@ -26,10 +26,11 @@ class DBHelper(context: Context?) :
                     "$NUMBER_EXERCISES INTEGER NOT NULL, " +
                     "FOREIGN KEY ($ID_TRAINING_TOPIC) REFERENCES $TABLE_TRAINING_TOPIC($ID_TRAINING_TOPIC)) ;")
         val SQL_CREATE_TABLE_TRAINING_EXERCISE =
-            ("CREATE TABLE $TABLE_TRAINING_EXERCISE" +
+            ("CREATE TABLE $TABLE_TRAINING_EXERCISE " +
                     " ($ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$ID_TRAINING INTEGER NOT NULL, " +
                     "$ID_EXERCISE INTEGER NOT NULL, " +
+                    "$APPOACHES_SUM INTEGER NOT NULL, " +
                     "$APPROACH TEXT NOT NULL, " +
                     "$REPEAT TEXT NOT NULL, " +
                     "$WORKLOAD TEXT NOT NULL, " +
@@ -96,6 +97,7 @@ class DBHelper(context: Context?) :
         const val APPROACH: String = "approach" //номер подхода
         const val REPEAT: String = "repeat" //количество повторений
         const val WORKLOAD: String = "workload" // нагрузка
+        const val APPOACHES_SUM: String = "approach_sum" // колличество подходов
     }
 }
 
@@ -113,3 +115,6 @@ var ttt =
             " repeat TEXT NOT NULL, workload TEXT NOT NULL " +
             "FOREIGN KEY (_id_training) REFERENCES training(_id_training) " +
             "FOREIGN KEY (_id_exercise) REFERENCES exercise(_id_exercise)) ;"
+//"CREATE TABLE training_exercise "+
+//+"(id_training_exercise INTEGER PRIMARY KEY AUTOINCREMENT, id_training INTEGER NOT NULL, id_exercise INTEGER NOT NULL, approach_sum INTEGER NOT NULL, approach TEXT NOT NULL, repeat TEXT NOT NULL, workload TEXT NOT NULL)
+//FOREIGN KEY (id_training) REFERENCES training(id_training), FOREIGN KEY (id_exercise) REFERENCES exercise(id_exercise)) ;"
