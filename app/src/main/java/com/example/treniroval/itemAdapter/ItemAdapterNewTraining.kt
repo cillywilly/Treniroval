@@ -63,7 +63,10 @@ class ItemAdapterNewTraining(
         p0.view.addApproachButton.setOnClickListener {
             managerDB.closeDb()
             managerDB.openDb()
-            managerDB.addApproach(p0.adapterPosition + 1, managerDB.getApproachNum(managerDB.getNewTrainingID(),p0.adapterPosition+1))
+            val positoin= p0.adapterPosition+1
+            val trainingId = managerDB.getNewTrainingID()
+            managerDB.addApproach(positoin, managerDB.getApproachNum(trainingId,positoin))
+//            managerDB.addApproach(trainingId, positoin, positoin)
             managerDB.closeDb()
             managerDB.openDb()
             updateAdapter(
@@ -75,15 +78,15 @@ class ItemAdapterNewTraining(
     }
 
     private fun getApproachNum(positoin: Int): Int {
-        val size =listExercisesInTable[positoin].listApproachesInExercise.size
-        return size+1
+        val size = listExercisesInTable[positoin].listApproachesInExercise.size
+        return size + 1
     }
 
     private fun updateAdapter(list: ArrayList<ExerciseInTable>, adapterPosition: Int) {
         listExercisesInTable.clear()
         listExercisesInTable.addAll(list)
 //        notifyItemInserted(adapterPosition)
-        notifyItemChanged(adapterPosition)
-//        notifyDataSetChanged()
+//        notifyItemChanged(adapterPosition)
+        notifyDataSetChanged()
     }
 }

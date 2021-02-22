@@ -212,20 +212,23 @@ class ManagerDB(context: Context) {
     }
 
     fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int) {
+//        val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseId'"
+//        val cursor = db.rawQuery(query, null)
+//        val approach
         db.execSQL(
             "INSERT INTO $TABLE_TRAINING_EXERCISE " +
                     "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD,$APPOACHES_SUM) " +
                     "VALUES('$trainingId', '$exerciseId', '$approachNum', " +
                     "'0', " +
-                    "'0', $PRIDYMAI);"
+                    "'0', '3');"
         )
     }
 
     @SuppressLint("Recycle")
-    fun getApproachNum(trainingId: Int, exerciseId: Int) : Int{
-        val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseId' order by id_training_exercise"
+    fun getApproachNum(trainingId: Int, exerciseNum: Int) : Int{
+        val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
         val cursor = db.rawQuery(query, null)
         cursor.moveToLast()
-        return cursor.getInt(cursor.getColumnIndex(ID_EXERCISE))+1
+        return cursor.getInt(cursor.getColumnIndex(APPROACH))+1
     }
 }
