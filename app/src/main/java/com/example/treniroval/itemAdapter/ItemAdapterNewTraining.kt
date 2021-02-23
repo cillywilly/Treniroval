@@ -35,7 +35,7 @@ class ItemAdapterNewTraining(
 
             val i = listItemExerciseInTable.listApproachesInExercise.size
             linearLayout.layoutParams =
-                ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 100 * i)
+                ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 140 * i)
 
             itemView.setOnClickListener {
                 Toast.makeText(context, "Pressed: ${exerciseName.text}", Toast.LENGTH_SHORT).show()

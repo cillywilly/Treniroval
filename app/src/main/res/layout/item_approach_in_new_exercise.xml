@@ -3,30 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
         android:id="@+id/approachInExercise"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="1dp"
-        android:layout_weight="10"
+        android:layout_height="40dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="4"
         android:text="podhod" />
 
-
-    <TextView
+    <EditText
         android:id="@+id/repeatInExercise"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="1dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="13dp"
         android:layout_weight="10"
+        android:inputType="number"
         android:text="povrtoreniya" />
 
-    <TextView
+    <EditText
         android:id="@+id/worckloadInExercise"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="1dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="13dp"
         android:layout_weight="10"
-        android:text="kg" />
+        android:text="kg"
+        android:inputType="number"
+        />
     <!--    <ImageButton-->
     <!--        android:id="@+id/addApproachButton"-->
     <!--        android:layout_width="wrap_content"-->
