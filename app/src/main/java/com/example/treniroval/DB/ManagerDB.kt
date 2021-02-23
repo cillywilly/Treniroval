@@ -115,10 +115,9 @@ class ManagerDB(context: Context) {
         trainingId: Int,
     ): ArrayList<ExerciseInTable> {
         val listItemExerciseInTable = ArrayList<ExerciseInTable>()
-        val approaches: ArrayList<ApproachInExercise> = ArrayList()
         var exerciseName = "BEZ NAZVANIYA"
         val exerciseCursor = db.query(
-            Companion.TABLE_TRAINING, null,
+            TABLE_TRAINING, null,
             "$ID_TRAINING=$trainingId",
             null, null, null, null
         )
@@ -127,24 +126,19 @@ class ManagerDB(context: Context) {
             exerciseCursor.getInt(exerciseCursor.getColumnIndex(NUMBER_EXERCISES))
 
         for (exerciseId in 1..exercisesCount) {
-            approaches.clear()
-            val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseId'"
+            val approaches  = ArrayList<ApproachInExercise>()
+            val query =
+                "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING=$trainingId and $ID_EXERCISE=$exerciseId"
             val cursor = db.rawQuery(query, null)
-//            cursor.moveToFirst()
-//            val idExercise = cursor.getString(cursor.getColumnIndex(ID_EXERCISE))
-//            val numOfApproach = cursor.getString(cursor.getColumnIndex(APPROACH))
-//            println(idExercise+"bleaty"+numOfApproach+"\n")
-            var i  =1
-            while (cursor.moveToNext()) {
+            var i = 1
 
+            while (cursor.moveToNext()) {
                 val idTraining = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
                 val idExercise = cursor.getString(cursor.getColumnIndex(ID_EXERCISE))
                 val numOfApproach = cursor.getString(cursor.getColumnIndex(APPROACH))
                 exerciseName = getExerciseName(db, idExercise)
                 val sumOfRepeats = cursor.getString(cursor.getColumnIndex(REPEAT))
                 val workLoad = cursor.getString(cursor.getColumnIndex(WORKLOAD))
-
-                println(idExercise+"bleat"+numOfApproach+"\n")
 
                 approaches.add(
                     ApproachInExercise(
@@ -225,10 +219,11 @@ class ManagerDB(context: Context) {
     }
 
     @SuppressLint("Recycle")
-    fun getApproachNum(trainingId: Int, exerciseNum: Int) : Int{
-        val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
+    fun getApproachNum(trainingId: Int, exerciseNum: Int): Int {
+        val query =
+            "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
         val cursor = db.rawQuery(query, null)
         cursor.moveToLast()
-        return cursor.getInt(cursor.getColumnIndex(APPROACH))+1
+        return cursor.getInt(cursor.getColumnIndex(APPROACH)) + 1
     }
 }

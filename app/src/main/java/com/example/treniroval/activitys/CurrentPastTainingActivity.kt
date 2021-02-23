@@ -42,3 +42,32 @@ class CurrentPastTainingActivity : Activity() {
         startActivity(intent)
     }
 }
+//var exerciseInTableList = ArrayList<ExerciseInTable>()
+//
+//        var approachInExerciseList1 = ArrayList<ApproachInExercise>()
+//        approachInExerciseList1.add(ApproachInExercise("1", "0", "0", 1))
+//        var exerciseInTable1= ExerciseInTable("odin",approachInExerciseList1)
+//        exerciseInTableList.add(exerciseInTable1)
+//
+//        var approachInExerciseList2 = ArrayList<ApproachInExercise>()
+//        approachInExerciseList2.add(ApproachInExercise("1", "0", "0", 1))
+//        approachInExerciseList2.add(ApproachInExercise("2", "0", "0", 1))
+//        var  exerciseInTable2= ExerciseInTable("dva",approachInExerciseList2)
+//        exerciseInTableList.add(exerciseInTable2)
+//
+//        var approachInExerciseList3 = ArrayList<ApproachInExercise>()
+//        approachInExerciseList3.add(ApproachInExercise("1", "0", "0", 1))
+//        approachInExerciseList3.add(ApproachInExercise("2", "0", "0", 1))
+//        approachInExerciseList3.add(ApproachInExercise("3", "0", "0", 1))
+//        var exerciseInTable3= ExerciseInTable("tri",approachInExerciseList3)
+//        exerciseInTableList.add(exerciseInTable3)
+//        listItems=exerciseInTableList
+//        for (item in exerciseInTableList) {
+//            println("--------------------------------------------" + listItems.size)
+//            println("название " + item.exerciseName)
+//            for (it in item.listApproachesInExercise) {
+//                println("номер подхода " + it.approachNumber)
+//                println("повторений " + it.repeatSum)
+//                println("назрузка " + it.load)
+//            }
+//        }
