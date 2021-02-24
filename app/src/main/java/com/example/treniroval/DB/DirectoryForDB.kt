@@ -21,7 +21,7 @@ fun addApproach(sqLiteDatabase: SQLiteDatabase) {
         val app: String = i.toString()
         val rep: String = (8..12).random().toString()
         val loa: String = (40..70).random().toString()
-        val approachInExercise = ApproachInExercise(app, rep, loa, i)
+        val approachInExercise = ApproachInExercise(app, rep, loa)
         approaches.add(approachInExercise)
     }
     val exercise = ExerciseInTable("Приседания со штангой", approaches)

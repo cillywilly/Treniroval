@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Build
 import android.support.annotation.RequiresApi
 import com.example.treniroval.DB.DBHelper.Companion
-import com.example.treniroval.DB.DBHelper.Companion.APPOACHES_SUM
 import com.example.treniroval.DB.DBHelper.Companion.APPROACH
 import com.example.treniroval.DB.DBHelper.Companion.DATE
 import com.example.treniroval.DB.DBHelper.Companion.EXERCISE_NAME
@@ -130,8 +129,6 @@ class ManagerDB(context: Context) {
             val query =
                 "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING=$trainingId and $ID_EXERCISE=$exerciseId"
             val cursor = db.rawQuery(query, null)
-            var i = 1
-
             while (cursor.moveToNext()) {
                 val idTraining = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
                 val idExercise = cursor.getString(cursor.getColumnIndex(ID_EXERCISE))
@@ -144,11 +141,9 @@ class ManagerDB(context: Context) {
                     ApproachInExercise(
                         numOfApproach,
                         sumOfRepeats,
-                        workLoad,
-                        i
+                        workLoad
                     )
                 )
-                i++
             }
             listItemExerciseInTable.add(
                 ExerciseInTable(exerciseName, approaches)
@@ -172,8 +167,8 @@ class ManagerDB(context: Context) {
 
             db.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
-                        "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD, $APPOACHES_SUM) " +
-                        "VALUES($lastTrainigid, $count,'1', '0', '0', '1');"
+                        "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
+                        "VALUES($lastTrainigid, $count,'1', '0', '0');"
             )
             count++
         }
@@ -211,10 +206,10 @@ class ManagerDB(context: Context) {
 //        val approach
         db.execSQL(
             "INSERT INTO $TABLE_TRAINING_EXERCISE " +
-                    "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD,$APPOACHES_SUM) " +
+                    "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
                     "VALUES('$trainingId', '$exerciseId', '$approachNum', " +
                     "'0', " +
-                    "'0', '3');"
+                    "'0');"
         )
     }
 

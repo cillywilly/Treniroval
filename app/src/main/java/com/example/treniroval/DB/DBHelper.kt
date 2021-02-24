@@ -30,7 +30,6 @@ class DBHelper(context: Context?) :
                     " ($ID_TRAINING_EXERCISE INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$ID_TRAINING INTEGER NOT NULL, " +
                     "$ID_EXERCISE INTEGER NOT NULL, " +
-                    "$APPOACHES_SUM INTEGER NOT NULL, " +
                     "$APPROACH TEXT NOT NULL, " +
                     "$REPEAT TEXT NOT NULL, " +
                     "$WORKLOAD TEXT NOT NULL, " +
@@ -97,7 +96,6 @@ class DBHelper(context: Context?) :
         const val APPROACH: String = "approach" //номер подхода
         const val REPEAT: String = "repeat" //количество повторений
         const val WORKLOAD: String = "workload" // нагрузка
-        const val APPOACHES_SUM: String = "approach_sum" // колличество подходов
     }
 }
 
