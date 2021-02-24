@@ -10,6 +10,7 @@ import com.example.treniroval.DB.DBHelper.Companion
 import com.example.treniroval.DB.DBHelper.Companion.APPROACH
 import com.example.treniroval.DB.DBHelper.Companion.DATE
 import com.example.treniroval.DB.DBHelper.Companion.EXERCISE_NAME
+import com.example.treniroval.DB.DBHelper.Companion.EXERCISE_NAME_IN_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.ID_EXERCISE
 import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING
 import com.example.treniroval.DB.DBHelper.Companion.ID_TRAINING_TOPIC
@@ -125,15 +126,15 @@ class ManagerDB(context: Context) {
             exerciseCursor.getInt(exerciseCursor.getColumnIndex(NUMBER_EXERCISES))
 
         for (exerciseId in 1..exercisesCount) {
-            val approaches  = ArrayList<ApproachInExercise>()
+            val approaches = ArrayList<ApproachInExercise>()
             val query =
                 "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING=$trainingId and $ID_EXERCISE=$exerciseId"
             val cursor = db.rawQuery(query, null)
             while (cursor.moveToNext()) {
-                val idTraining = cursor.getString(cursor.getColumnIndex(ID_TRAINING))
-                val idExercise = cursor.getString(cursor.getColumnIndex(ID_EXERCISE))
+                val idTraining = cursor.getInt(cursor.getColumnIndex(ID_TRAINING))
+                val idExercise = cursor.getInt(cursor.getColumnIndex(ID_EXERCISE))
                 val numOfApproach = cursor.getString(cursor.getColumnIndex(APPROACH))
-                exerciseName = getExerciseName(db, idExercise)
+                exerciseName = getExerciseName(idTraining, idExercise)
                 val sumOfRepeats = cursor.getString(cursor.getColumnIndex(REPEAT))
                 val workLoad = cursor.getString(cursor.getColumnIndex(WORKLOAD))
 
@@ -153,61 +154,32 @@ class ManagerDB(context: Context) {
     }
 
     fun setExercisesList(exercisesNames: ArrayList<String>) {
-        val lastTrainigid = getNewTrainingID()
-//        val approachListItems: ArrayList<ApproachInExerciseListItem> = ArrayList()
-//        val exerciseTraining: ArrayList<ExerciseInTable> = ArrayList()
-//
-//        val approachInExercise = ApproachInExerciseListItem("1", "0", "0")
-//        approachListItems.add(approachInExercise)
-        db.execSQL("update $TABLE_TRAINING set $NUMBER_EXERCISES=${exercisesNames.size} where $ID_TRAINING =$lastTrainigid")
+        val lastTrainingId = getNewTrainingID()
+        db.execSQL("update $TABLE_TRAINING set $NUMBER_EXERCISES=${exercisesNames.size} where $ID_TRAINING =$lastTrainingId")
         var count = 1
         for (exerciseName in exercisesNames) {
-//            val exercise = ExerciseInTable(exerciseName, approachListItems)
-//            exerciseTraining.add(exercise)
-
             db.execSQL(
                 "INSERT INTO $TABLE_TRAINING_EXERCISE" +
-                        "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
-                        "VALUES($lastTrainigid, $count,'1', '0', '0');"
+                        "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD, $EXERCISE_NAME_IN_TRAINING) " +
+                        "VALUES($lastTrainingId, $count,'1', '0', '0', '$exerciseName');"
             )
             count++
         }
-    }
-
-
-    @SuppressLint("Recycle")
-    fun select(db: SQLiteDatabase, table: String, selection: String, column: String): String {
-        val cursor = db.query(table, null, selection, null, null, null, null)
-        cursor.moveToFirst()
-        return cursor.getString(cursor.getColumnIndex(column))
     }
 
     fun closeDb() {
         db.close()
     }
 
-    @SuppressLint("Recycle")
-    fun getExerciseName(db: SQLiteDatabase, exerciseId: String): String {
-        val cursor = db.query(
-            Companion.TABLE_EXERCISE, null, "$ID_EXERCISE='$exerciseId'",
-            null, null, null, null
-        )
-        cursor.moveToLast()
-        return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME))
+    fun addApproach(exerciseId: Int, approachNum: Int, exerciseName : String) {
+        addApproach(getNewTrainingID(), exerciseId, approachNum, exerciseName)
     }
 
-    fun addApproach(exerciseId: Int, approachNum: Int) {
-        addApproach(getNewTrainingID(), exerciseId, approachNum)
-    }
-
-    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int) {
-//        val query = "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseId'"
-//        val cursor = db.rawQuery(query, null)
-//        val approach
+    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int, exerciseName : String) {
         db.execSQL(
             "INSERT INTO $TABLE_TRAINING_EXERCISE " +
-                    "($ID_TRAINING, $ID_EXERCISE,$APPROACH,$REPEAT,$WORKLOAD) " +
-                    "VALUES('$trainingId', '$exerciseId', '$approachNum', " +
+                    "($ID_TRAINING, $ID_EXERCISE,$APPROACH, $EXERCISE_NAME_IN_TRAINING, $REPEAT, $WORKLOAD) " +
+                    "VALUES('$trainingId', '$exerciseId', '$approachNum', $exerciseName, " +
                     "'0', " +
                     "'0');"
         )
@@ -216,9 +188,18 @@ class ManagerDB(context: Context) {
     @SuppressLint("Recycle")
     fun getApproachNum(trainingId: Int, exerciseNum: Int): Int {
         val query =
-            "SELECT * FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
+            "SELECT APPROACH FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
         val cursor = db.rawQuery(query, null)
         cursor.moveToLast()
         return cursor.getInt(cursor.getColumnIndex(APPROACH)) + 1
+    }
+
+    @SuppressLint("Recycle")
+    fun getExerciseName(trainingId: Int, exerciseNum: Int): String {
+        val query =
+            "SELECT EXERCISE_NAME_IN_TRAINING FROM $TABLE_TRAINING_EXERCISE WHERE $ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' order by id_training_exercise"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME_IN_TRAINING))
     }
 }

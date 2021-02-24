@@ -33,6 +33,7 @@ class DBHelper(context: Context?) :
                     "$APPROACH TEXT NOT NULL, " +
                     "$REPEAT TEXT NOT NULL, " +
                     "$WORKLOAD TEXT NOT NULL, " +
+                    "$EXERCISE_NAME_IN_TRAINING TEXT, " +
                     "FOREIGN KEY ($ID_TRAINING) REFERENCES $TABLE_TRAINING($ID_TRAINING), " +
                     "FOREIGN KEY ($ID_EXERCISE) REFERENCES $TABLE_EXERCISE($ID_EXERCISE)) ;")
 
@@ -96,6 +97,7 @@ class DBHelper(context: Context?) :
         const val APPROACH: String = "approach" //номер подхода
         const val REPEAT: String = "repeat" //количество повторений
         const val WORKLOAD: String = "workload" // нагрузка
+        const val EXERCISE_NAME_IN_TRAINING: String = "exercise_name_in_training" // нагрузка
     }
 }
 

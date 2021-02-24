@@ -16,14 +16,13 @@ class ItemAdapterNewTraining(
     var listExercisesInTable: ArrayList<ExerciseInTable>,
     var context: Context, private val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
-    lateinit var newListItem: ArrayList<ExerciseInTable>
+    val trainingId = managerDB.getNewTrainingID()
 
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTraining)
         private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
         private val addApproach = view.findViewById<ImageButton>(R.id.addApproachButton)
-
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
 
             exerciseName.text = listItemExerciseInTable.exerciseName
@@ -64,8 +63,8 @@ class ItemAdapterNewTraining(
             managerDB.closeDb()
             managerDB.openDb()
             val positoin= p0.adapterPosition+1
-            val trainingId = managerDB.getNewTrainingID()
-            managerDB.addApproach(positoin, managerDB.getApproachNum(trainingId,positoin))
+
+            managerDB.addApproach(positoin, managerDB.getApproachNum(trainingId,positoin), listItem.exerciseName)
             managerDB.closeDb()
             managerDB.openDb()
             updateAdapter(

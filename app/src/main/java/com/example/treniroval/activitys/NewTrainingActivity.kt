@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.ImageButton
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
@@ -45,14 +44,5 @@ class NewTrainingActivity : Activity() {
     fun onClickBack(view: View) {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    fun onClickAddApproach(view: View) {
-        val addApproach = findViewById<ImageButton>(R.id.addApproachButton)
-        addApproach.setOnClickListener {
-            managerDB.addApproach(3, 2)
-            listItems = managerDB.getCurrentTraining(newTrainingID)
-            ItemAdapterNewTraining(listItems, this, managerDB).notifyDataSetChanged()
-        }
     }
 }
