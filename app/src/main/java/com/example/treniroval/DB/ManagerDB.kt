@@ -171,15 +171,15 @@ class ManagerDB(context: Context) {
         db.close()
     }
 
-    fun addApproach(exerciseId: Int, approachNum: Int, exerciseName : String) {
+    fun addApproach(exerciseId: Int, approachNum: Int, exerciseName: String) {
         addApproach(getNewTrainingID(), exerciseId, approachNum, exerciseName)
     }
 
-    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int, exerciseName : String) {
+    fun addApproach(trainingId: Int, exerciseId: Int, approachNum: Int, exerciseName: String) {
         db.execSQL(
             "INSERT INTO $TABLE_TRAINING_EXERCISE " +
                     "($ID_TRAINING, $ID_EXERCISE,$APPROACH, $EXERCISE_NAME_IN_TRAINING, $REPEAT, $WORKLOAD) " +
-                    "VALUES('$trainingId', '$exerciseId', '$approachNum', $exerciseName, " +
+                    "VALUES('$trainingId', '$exerciseId', '$approachNum', '$exerciseName', " +
                     "'0', " +
                     "'0');"
         )
@@ -201,5 +201,21 @@ class ManagerDB(context: Context) {
         val cursor = db.rawQuery(query, null)
         cursor.moveToFirst()
         return cursor.getString(cursor.getColumnIndex(EXERCISE_NAME_IN_TRAINING))
+    }
+
+    @SuppressLint("Recycle")
+    fun saveApproach(trainingId: Int, exerciseNum: Int, approachNum: Int, repeats: String, load:String) {
+
+
+        val values = ContentValues().apply {
+            put(REPEAT, repeats )
+            put(WORKLOAD, load)
+        }
+        db.update(
+            TABLE_TRAINING_EXERCISE,
+            values,
+            "$ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' and $APPROACH='$approachNum'",
+            null
+        )
     }
 }

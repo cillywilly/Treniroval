@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_training_constructor.*
 class TrainingConstructorActivity : Activity() {
 
     private var managerDB = ManagerDB(this)
-    private lateinit var selectedItems1: ArrayList<String>
+    private lateinit var selectedItems: ArrayList<String>
     private lateinit var trainingName:String
     private lateinit var trainingDate:String
 
@@ -35,14 +35,14 @@ class TrainingConstructorActivity : Activity() {
         val r = ItemAdapterTrainingConstructor(listItemExercise, this)
 
         exerciseList.adapter = r
-        selectedItems1 = r.selectedItems
+        selectedItems = r.selectedItems
     }
 
     fun onClickSave(view: View) {
         val buttonSave: Button = findViewById(R.id.buttonSave)
         buttonSave.setOnClickListener {
             managerDB.openDb()
-            managerDB.setExercisesList(selectedItems1)
+            managerDB.setExercisesList(selectedItems)
             val intent = Intent(this, NewTrainingActivity::class.java)
             intent.putExtra("trainingName", trainingName)
             intent.putExtra("trainingDate", trainingDate)
