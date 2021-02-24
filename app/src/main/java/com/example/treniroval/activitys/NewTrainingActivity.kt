@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.TextView
+import android.widget.EditText
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.ListItem.ExerciseInTable
 import com.example.treniroval.R
@@ -48,13 +48,8 @@ class NewTrainingActivity : Activity() {
 
     @SuppressLint("WrongViewCast")
     fun onClickSaveApproach(view: View) {
-        val repeats: String = findViewById<TextView>(R.id.repeatInExercise).text as String
-        val load: String = findViewById<TextView>(R.id.worckloadInExercise).text as String
-        listItems = managerDB.getCurrentTraining(newTrainingID)
-        for (item in 1..listItems.size) {
-            for (i in 1..listItems[item - 1].listApproachesInExercise.size) {
-                managerDB.saveApproach(newTrainingID, item, i, repeats, load)
-            }
-        }
+        val repeats: String = findViewById<EditText>(R.id.repeatInExercise).text.toString()
+        val load: String = findViewById<EditText>(R.id.worckloadInExercise).text.toString()
+                managerDB.saveApproach(listItems, newTrainingID)
     }
 }

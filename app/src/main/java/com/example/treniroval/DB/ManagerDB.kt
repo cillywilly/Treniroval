@@ -204,18 +204,25 @@ class ManagerDB(context: Context) {
     }
 
     @SuppressLint("Recycle")
-    fun saveApproach(trainingId: Int, exerciseNum: Int, approachNum: Int, repeats: String, load:String) {
-
-
-        val values = ContentValues().apply {
-            put(REPEAT, repeats )
-            put(WORKLOAD, load)
+    fun saveApproach(exercises: ArrayList<ExerciseInTable>, trainingId: Int) {
+        var i=1
+        for (exercise in exercises) {
+            for (approach in exercise.listApproachesInExercise) {
+                val approachNum = approach.approachNumber
+                val repeats = approach.repeatSum
+                val load = approach.load
+                val values = ContentValues().apply {
+                    put(REPEAT, repeats)
+                    put(WORKLOAD, load)
+                }
+                db.update(
+                    TABLE_TRAINING_EXERCISE,
+                    values,
+                    "$ID_TRAINING='$trainingId' and $ID_EXERCISE='$i' and $APPROACH='$approachNum'",
+                    null
+                )
+            }
+            i++
         }
-        db.update(
-            TABLE_TRAINING_EXERCISE,
-            values,
-            "$ID_TRAINING='$trainingId' and $ID_EXERCISE='$exerciseNum' and $APPROACH='$approachNum'",
-            null
-        )
     }
 }
