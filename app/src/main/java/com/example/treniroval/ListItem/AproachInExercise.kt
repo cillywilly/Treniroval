@@ -1,7 +1,9 @@
 package com.example.treniroval.ListItem
 
-data class ApproachInExercise(
+import androidx.databinding.BaseObservable
+
+data class ApproachInExercise (
     var approachNumber: String,
     var repeatSum: String,
     var load: String
-)
+) : BaseObservable()

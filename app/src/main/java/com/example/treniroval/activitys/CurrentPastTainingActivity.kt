@@ -5,9 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterExerciseInTable
@@ -27,6 +28,7 @@ class CurrentPastTainingActivity : Activity() {
         managerDB.openDb()
 
         val listItems = managerDB.getCurrentTraining(managerDB.getNewTrainingID())
+        val currentPastTrainingList = findViewById<RecyclerView>(R.id.currentPastTrainingList)
 
         currentPastTrainingList.hasFixedSize()
         currentPastTrainingList.layoutManager = LinearLayoutManager(this)

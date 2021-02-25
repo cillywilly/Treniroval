@@ -2,12 +2,12 @@ package com.example.treniroval.itemAdapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.treniroval.ListItem.PastTraining
 import com.example.treniroval.R
 import com.example.treniroval.activitys.CurrentPastTainingActivity

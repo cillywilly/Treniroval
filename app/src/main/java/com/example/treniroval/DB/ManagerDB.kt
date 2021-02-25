@@ -5,7 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.example.treniroval.DB.DBHelper.Companion
 import com.example.treniroval.DB.DBHelper.Companion.APPROACH
 import com.example.treniroval.DB.DBHelper.Companion.DATE
@@ -139,11 +139,7 @@ class ManagerDB(context: Context) {
                 val workLoad = cursor.getString(cursor.getColumnIndex(WORKLOAD))
 
                 approaches.add(
-                    ApproachInExercise(
-                        numOfApproach,
-                        sumOfRepeats,
-                        workLoad
-                    )
+                    ApproachInExercise(numOfApproach, sumOfRepeats, workLoad)
                 )
             }
             listItemExerciseInTable.add(
@@ -204,13 +200,16 @@ class ManagerDB(context: Context) {
     }
 
     @SuppressLint("Recycle")
-    fun saveApproach(exercises: ArrayList<ExerciseInTable>, trainingId: Int) {
-        var i=1
+    fun saveApproach(
+        exercises: ArrayList<ExerciseInTable>,
+        trainingId: Int,
+        repeats: String,
+        load: String
+    ) {
+        var i = 1
         for (exercise in exercises) {
             for (approach in exercise.listApproachesInExercise) {
                 val approachNum = approach.approachNumber
-                val repeats = approach.repeatSum
-                val load = approach.load
                 val values = ContentValues().apply {
                     put(REPEAT, repeats)
                     put(WORKLOAD, load)

@@ -3,9 +3,9 @@ package com.example.treniroval.activitys
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import com.example.treniroval.itemAdapter.ItemAdapterTrainingConstructor

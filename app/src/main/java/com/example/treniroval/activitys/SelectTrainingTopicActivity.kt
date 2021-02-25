@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.example.treniroval.DB.ManagerDB
 import com.example.treniroval.R
 import java.time.LocalDateTime

@@ -1,7 +1,7 @@
 package com.example.treniroval.ItemLayout
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.treniroval.R
 
 class item_layout_exercise_new_training : AppCompatActivity() {

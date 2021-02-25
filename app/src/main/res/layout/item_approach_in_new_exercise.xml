@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +20,9 @@
         android:layout_marginTop="13dp"
         android:layout_weight="10"
         android:gravity="center_horizontal"
-        android:inputType="number" />
+        android:inputType="number"
+        android:autofillHints="повторения"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/worckloadInExercise"
@@ -28,6 +31,8 @@
         android:layout_marginTop="13dp"
         android:layout_weight="10"
         android:gravity="center_horizontal"
-        android:inputType="number" />
+        android:inputType="number"
+        android:autofillHints="нагрузка"
+        tools:ignore="LabelFor" />
 
 </LinearLayout>
