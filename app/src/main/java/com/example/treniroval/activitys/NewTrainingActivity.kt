@@ -46,7 +46,7 @@ class NewTrainingActivity : Activity() {
     }
 
     @SuppressLint("WrongViewCast")
-    fun onClickSaveApproach(view: View) {
+    fun onClickSaveApp(view: View) {
         val repeats: String = findViewById<EditText>(R.id.repeatInExercise).text.toString()
         val load: String = findViewById<EditText>(R.id.worckloadInExercise).text.toString()
                 managerDB.saveApproach(listItems, newTrainingID, repeats, load)

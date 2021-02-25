@@ -1,5 +1,6 @@
 package com.example.treniroval.itemAdapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +18,11 @@ class ItemAdapterNewTraining(
     var context: Context, private val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
     val trainingId = managerDB.getNewTrainingID()
-
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTraining)
         private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
-        private val addApproach = view.findViewById<ImageButton>(R.id.addApproachButton)
+        private val addApproach = view.findViewById<ImageButton>(R.id.buttonSaveApproach)
         fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
 
             exerciseName.text = listItemExerciseInTable.exerciseName
@@ -63,7 +63,6 @@ class ItemAdapterNewTraining(
             managerDB.closeDb()
             managerDB.openDb()
             val positoin= p0.adapterPosition+1
-
             managerDB.addApproach(positoin, managerDB.getApproachNum(trainingId,positoin), listItem.exerciseName)
             managerDB.closeDb()
             managerDB.openDb()
@@ -75,16 +74,16 @@ class ItemAdapterNewTraining(
         p0.bind(listItem, context)
     }
 
-    private fun getApproachNum(positoin: Int): Int {
-        val size = listExercisesInTable[positoin].listApproachesInExercise.size
-        return size + 1
-    }
-
     private fun updateAdapter(list: ArrayList<ExerciseInTable>, adapterPosition :Int) {
         listExercisesInTable.clear()
         listExercisesInTable.addAll(list)
 //        notifyItemInserted(adapterPosition)
         notifyItemChanged(adapterPosition)
 //        notifyDataSetChanged()
+    }
+
+    @SuppressLint("WrongViewCast")
+    fun onClickSaveApproach(view: View) {
+
     }
 }
