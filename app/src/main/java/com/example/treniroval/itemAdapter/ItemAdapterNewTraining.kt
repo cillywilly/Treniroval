@@ -1,6 +1,5 @@
 package com.example.treniroval.itemAdapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -18,19 +17,22 @@ class ItemAdapterNewTraining(
     var context: Context, private val managerDB: ManagerDB
 ) : RecyclerView.Adapter<ItemAdapterNewTraining.ViewHolder>() {
     val trainingId = managerDB.getNewTrainingID()
+
     inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         private val linearLayout = view.findViewById<LinearLayout>(R.id.linearLayoutNewTraining)
         private val exerciseName = view.findViewById<TextView>(R.id.exerciseNameInNewTraining)
         private val approach = view.findViewById<ListView>(R.id.approachesInNewTraining)
         private val addApproach = view.findViewById<ImageButton>(R.id.buttonSaveApproach)
-        fun bind(listItemExerciseInTable: ExerciseInTable, context: Context) {
+
+        fun bind(listItemExerciseInTable: ExerciseInTable, context: Context, exrciseId : Int) {
 
             exerciseName.text = listItemExerciseInTable.exerciseName
             val adapter = ItemAdapterApproachInNewTraining(
                 listItemExerciseInTable.listApproachesInExercise,
-                context
+                context,managerDB, trainingId, exrciseId
             )
             approach.adapter = adapter
+
 
             val i = listItemExerciseInTable.listApproachesInExercise.size
             linearLayout.layoutParams =
@@ -62,8 +64,12 @@ class ItemAdapterNewTraining(
         p0.view.addApproachButton.setOnClickListener {
             managerDB.closeDb()
             managerDB.openDb()
-            val positoin= p0.adapterPosition+1
-            managerDB.addApproach(positoin, managerDB.getApproachNum(trainingId,positoin), listItem.exerciseName)
+            val positoin = p0.adapterPosition + 1
+            managerDB.addApproach(
+                positoin,
+                managerDB.getApproachNum(trainingId, positoin),
+                listItem.exerciseName
+            )
             managerDB.closeDb()
             managerDB.openDb()
             updateAdapter(
@@ -71,10 +77,10 @@ class ItemAdapterNewTraining(
                 p1
             )
         }
-        p0.bind(listItem, context)
+        p0.bind(listItem, context, p1)
     }
 
-    private fun updateAdapter(list: ArrayList<ExerciseInTable>, adapterPosition :Int) {
+    private fun updateAdapter(list: ArrayList<ExerciseInTable>, adapterPosition: Int) {
         listExercisesInTable.clear()
         listExercisesInTable.addAll(list)
 //        notifyItemInserted(adapterPosition)
@@ -82,8 +88,5 @@ class ItemAdapterNewTraining(
 //        notifyDataSetChanged()
     }
 
-    @SuppressLint("WrongViewCast")
-    fun onClickSaveApproach(view: View) {
 
-    }
 }

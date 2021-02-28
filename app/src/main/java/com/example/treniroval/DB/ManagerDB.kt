@@ -224,4 +224,28 @@ class ManagerDB(context: Context) {
             i++
         }
     }
+
+    fun saveRepeat(trainingId: Int, exerciseId: Int, approachNum: Int, repeats: String) {
+        val values = ContentValues().apply {
+            put(REPEAT, repeats)
+        }
+        db.update(
+            TABLE_TRAINING_EXERCISE,
+            values,
+            "$ID_TRAINING='$trainingId' and $ID_EXERCISE='${exerciseId+1}' and $APPROACH='${approachNum+1}'",
+            null
+        )
+    }
+
+    fun saveLoad(trainingId: Int, exerciseId: Int, approachNum: Int, load: String) {
+        val values = ContentValues().apply {
+            put(WORKLOAD, load)
+        }
+        db.update(
+            TABLE_TRAINING_EXERCISE,
+            values,
+            "$ID_TRAINING='$trainingId' and $ID_EXERCISE='${exerciseId+1}' and $APPROACH='${approachNum+1}'",
+            null
+        )
+    }
 }
