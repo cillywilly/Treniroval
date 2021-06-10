@@ -9,6 +9,7 @@
     <string name="ButtonBack">Назад</string>
     <string name="ButtonSave">Сохранить</string>
     <string name="StartTraining">Приступить к тренировке</string>
+    <string name="EndTraining">Завершить тренировку</string>
     <string name="Exercise">Упражнение</string>
     <string name="Approach">Подходы</string>
     <string name="Repeat">повторения</string>

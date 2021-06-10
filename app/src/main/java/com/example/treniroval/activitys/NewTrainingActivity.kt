@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.treniroval.DB.ManagerDB
@@ -40,21 +39,8 @@ class NewTrainingActivity : Activity() {
         newTrainingList.adapter = ItemAdapterNewTraining(listItems, this, managerDB)
     }
 
-    fun onClickBack(view: View) {
+    fun onClickEndTraining(view: View) {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    fun onClickSaveApp(view: View) {
-        val adapter= newTrainingList.adapter
-        listItems = managerDB.getCurrentTraining(newTrainingID)
-        for (i in 1..adapter?.itemCount!!) {
-            val repeats: String = findViewById<EditText>(R.id.repeatInExercise).text.toString()
-            val load: String = findViewById<EditText>(R.id.worckloadInExercise).text.toString()
-
-            managerDB.saveApproach(listItems, newTrainingID, repeats, load)
-
-        }
-
     }
 }
